@@ -1,0 +1,2 @@
+(()=>{var e,d;document.body.appendChild((e=document.createELement("div"),(d=document.createELement("h2")).innerText="Some webpack setup",e.appendChild(d),e))})();
+//# sourceMappingURL=index.bundle.js.map

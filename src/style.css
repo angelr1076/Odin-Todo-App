@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  --mont: "Montserrat", sans-serif;
+  --navbuttons: linear-gradient(180deg, #6fb4fd 0%, #5caafc 100%);
+  --brickblue: #b2c9d8;
+  --bluehover: #ccdfeb;
+  --brickred: #cb4154;
+  --charcoal: rgba(50, 48, 48, 0.304);
+  --salmon: rgba(250, 128, 114, 1);
+  --salmonlgt: rgba(250, 128, 114, 0.6);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: hsl(0, 0%, 90%);
+  font-family: var(--mont);
+}
+
+.content {
+  display: grid;
+  grid-template: 1fr 5fr 7fr / 1fr 5fr 7fr; 
+  gap: 0.25em;
+  background-color: gray;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Navbar */
+.nav-container {
+  background: var(--salmon);
+  grid-column: 1 / 5;
+  grid-row: 1 / 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--salmon);
+}
+
+.project-list {
+  margin: none;
+}
+
+.project-button {
+  background-color: #fff;
+  color: #000;
+}
+
+.hamnav {
+  width: 100%;
+}
+
+.hamitems {
+  display: flex;
+}
+
+.hamitems button {
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+}
+
+.hamitems button:hover {
+  background: var(--salmonlgt);
+  border-radius: 10px;
+}
+
+.hamnav label,
+#hamburger {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  background: var(--salmon);
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  margin-left: 3rem;
+}
+
+.brand-btn {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.hamnav {
+  display: flex;
+  flex-direction: row;
+}
+
+label[for="hamburger"] {
+  font-size: 3em;
+}
+
+li {
+  list-style-type: none;
+  margin-left: 3rem;
+}
+
+button::after {
+  content: '';
+  width: 0rem;
+  height: 0.15rem;
+  background-color: rgba(100, 100, 100, 0.8);
+  display: block;
+  border-radius: 0.2rem;
+  margin: 0.2rem auto 0 auto;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:hover::after {
+  width: 2rem;
+}
+
+/* Sidebar */
+.sidebar-container {
+  background: #fff;
+  grid-column: 1 / 2;
+  grid-row: 2 / 5;
+  padding: 1em;
+}
+
+/* Todos */
+.todo-container {
+  background: #ccdfeb;
+  grid-column: 2 / 5;
+  grid-row: 2 / 5;
+  padding: 1em;
+
+  /* display: flex; */
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
+.todos-element {
+  grid-column: 2 / 5;
+  grid-row: 3 / 5;
+
+  display: flex;
+}
+
+.todo-item {
+  display: flex;
+  padding: 1em;
+  gap: 1.5em;
+  justify-content:space-evenly;
+  align-items: center;
+  background-color: #fff;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+/* Show hide */
+.hidden {
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.show {
+  visibility: visible;
+}
