@@ -1,8 +1,10 @@
+import './styles/style.css';
+
 function component() {
-  // Create div with an ID of 'domContent'
-  const mainContainer = document.createElement('div'); // MAIN DIV
-  mainContainer.setAttribute('id', 'main');
-  mainContainer.setAttribute('class', 'main');
+  const mainContainer = document.createElement('div');
+  mainContainer.setAttribute('class', 'main-container', 'id', 'mainContainer');
+  const mainContent = document.querySelector('#content');
+  mainContainer.appendChild(mainContent);
 
   return mainContainer;
 }

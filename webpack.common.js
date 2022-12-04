@@ -9,7 +9,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       favicon: './src/images/favicon.png',
-      title: 'Odin Todo List',
       template: './src/index.html',
     }),
   ],
