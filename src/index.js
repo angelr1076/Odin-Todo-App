@@ -1,3 +1,12 @@
+import {
+  renderProjectSidebar,
+  renderTodoFromProject,
+} from './components/views';
+import {
+  handleProjectView,
+  handleSubmitProject,
+  handleSubmitTodo,
+} from './components/eventHandlers';
 import './styles/style.css';
 
 function component() {
@@ -10,3 +19,9 @@ function component() {
 }
 
 document.body.appendChild(component());
+// Show list of Projects in sidebar
+renderProjectSidebar();
+renderTodoFromProject();
+// Once project is submitted, push it to the projects list
+handleSubmitProject();
+handleSubmitTodo();

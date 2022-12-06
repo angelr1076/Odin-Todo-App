@@ -6,21 +6,25 @@ let projects = projectArray;
 // Create a new todo
 const createTodo = todo => {
   const id = uuidv4();
+  const projectId = document.querySelector('#projectId').value;
 
   const todoProps = {
     id,
+    projectId,
     title: todo.title,
     description: todo.description,
     dueDate: todo.dueDate,
     priority: todo.priority,
-    project: todo.projectIndex,
-    projectId: id,
   };
 
   // Push the todo to the project by selected project index
-  projects[todoProps.project].todos.push(todoProps);
-  // Add the projectId to the todo
-  todoProps.projectId = projects[todoProps.project].id;
+  projects.find(project => {
+    if (project.id === todoProps.projectId) {
+      project.todos.push(todoProps);
+    }
+    return;
+  });
+
   console.log('Projects from todos module', { projectArray });
 
   return { todoProps };

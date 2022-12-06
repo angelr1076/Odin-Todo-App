@@ -30,17 +30,50 @@
           </div>
           <div class="Projects">
             <h3>Projects</h3>
-            <ul class="project-list">
+            <ul id="projectList" class="project-list">
               <!-- Projects list -->
-              <!-- Add project button -->
-              <!-- Project form collapsible -->
             </ul>
+            <!-- Add project button -->
+            <!-- Project form collapsible -->
+            <hr>
+            <form action="" id="projectForm" class="project-form" name="projectForm">
+              <label for="name" class="label">+ Project</label>
+              <input type="text" id="name" class="name">
+              <input type="Submit" id="projectSubmitBtn" class="create-project">
+            </form>
           </div>
         </div>
         <div id="todosContainer" class="todos-container lower-container__right">
           <!-- Project name -->
+          <h2 id="projectHeader" class="project-header"></h2> 
           <!-- Project's todos -->
+          <ul id="todosList" class="todos-list"></ul> 
           <!-- Add todos button -->
+          <hr>
+          <br>
+          <form action="" id="todoForm" class="todo-form" name="todoForm">
+            <div class="form-row">
+              <label for="title" class="label">Title</label>
+              <input type="text" id="title" class="title">
+            </div>
+            <div class="form-row">
+              <label for="description" class="label">Description</label>
+              <input type="text" id="description" class="description">
+            </div>
+            <div class="form-row">
+              <label for="date" class="label">Due Date</label>
+              <input type="date" id="dueDate" class="date">
+            </div>
+            <div class="form-row">
+              <label for="priority" class="label">Priority</label>
+              <input type="number" id="priority" class="priority">
+            </div>
+            <div class="form-row">
+              <label for="projectId" class="label">Project ID</label>
+              <input type="text" id="projectId">
+            </div>
+            <input type="Submit" id="todoSubmitBtn" class="create-todo">
+          </form>
           <!-- Todos form collapsible -->
         </div>
       </div> 

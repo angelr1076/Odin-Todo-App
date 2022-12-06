@@ -60,6 +60,22 @@ body {
   flex: 1;
 }
 
+.project-listitem {
+  list-style-type: none;
+}
+
+.project-button {
+  background-color: #fff;
+  margin-left: 1em;
+  border: none;
+  cursor: pointer;
+}
+
+.project-button:hover {
+  opacity: 0.7;
+  background-color: var(--bluehover);
+}
+
 /* Todos */
 .todos-container {
   background: #ccdfeb;
@@ -69,6 +85,10 @@ body {
   flex: 6;
 }
 
+.todo-form {
+  display: flex;
+  flex-direction: column;
+}
 /* .todos-element {
   display: flex;
 }
