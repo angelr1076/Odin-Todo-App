@@ -1,20 +1,21 @@
 import { projectArray } from './projects';
+const projects = projectArray;
 
 // Render project list in a dropdown selector
 const renderProjectList = () => {
   const select = document.querySelector('#projects');
   const values = projectArray.map(item => item);
 
-  for (let item of values) {
+  const projectsList = values.forEach(item => {
     let option = document.createElement('option');
     option.value = item.name;
     option.setAttribute('id', item.id);
     option.setAttribute('class', item.name);
     option.innerHTML = item.name;
     select.appendChild(option);
-  }
+  });
 
-  return renderProjectList;
+  return projectsList;
 };
 
 // Render project list in the sidebar
@@ -27,12 +28,13 @@ const renderProjectSidebar = () => {
     projectsListItem.setAttribute('class', 'project-listitem');
     const projectBtn = document.createElement('button');
     projectBtn.setAttribute('data-attribute', `${project.id}`);
+    projectBtn.setAttribute('id', 'projectBtn');
     projectBtn.setAttribute('class', 'project-button');
     // Add an anchor for each item
     projectBtn.innerHTML = project.name;
     projectsListItem.append(projectBtn);
     projectList.append(projectsListItem);
-    console.log(projectList, projectArray);
+    console.log(projectArray);
   });
 
   return renderList;
@@ -40,7 +42,6 @@ const renderProjectSidebar = () => {
 
 // Render todos when selecting project from sidebar list
 const renderTodoFromProject = () => {
-  const projects = projectArray;
   // Grab the project name querySelector
   const projectHeader = document.querySelector('#projectHeader');
   const projectIdField = document.querySelector('#projectId');
@@ -49,33 +50,46 @@ const renderTodoFromProject = () => {
 
   // Grab the project button clicked
   const projectBtn = document.querySelectorAll('button.project-button');
+
+  initProjectBtn(projectBtn, todosList, projectIdField, projectHeader);
+};
+
+// Create a list of buttons for each project
+const initProjectBtn = (projectBtn, list, projectId, header) => {
   projectBtn.forEach(btn => {
     const btnId = btn.getAttribute('data-attribute');
     btn.addEventListener('click', () => {
+      list.innerHTML = '';
       // Search for the projectId in the projectArray
-      projects.filter(project => {
-        if (btnId === project.id) {
-          // Render the project name in the project name querySelector
-          projectHeader.innerHTML = project.name;
-          // Pass the project ID to the projectIdField
-          projectIdField.value = project.id;
-
-          const todos = project.todos;
-          todos.forEach(todo => {
-            let li = document.createElement('li');
-            // Render the project list in the project ul querySelector
-            todosList.appendChild(li);
-            li.setAttribute('class', 'todo-item');
-            li.innerHTML = `
-              <h3>Title: ${todo.title}</h3> |
-              <p>Description: ${todo.description}</p> |
-              <p>Priority: ${todo.priority}</p> |
-              <p>Due: ${todo.dueDate}</p>
-            `;
-          });
-        }
-      });
+      filterProject(btnId, projectId, header);
     });
+  });
+};
+
+// Filter the project by its ID
+const filterProject = (projectBtn, projectId, header) => {
+  projects.filter(project => {
+    if (projectBtn === project.id) {
+      // Render the project name in the project name querySelector
+      header.innerHTML = project.name;
+      // Pass the project ID to the projectId
+      projectId.value = project.id;
+
+      const todos = project.todos;
+      todos.forEach(todo => {
+        let li = document.createElement('li');
+        // Render the project list in the project ul querySelector
+        todosList.appendChild(li);
+        li.setAttribute('class', 'todo-item');
+        li.innerHTML = `
+                <h3>Title: ${todo.title}</h3> |
+                <p>Description: ${todo.description}</p> |
+                <p>Priority: ${todo.priority}</p> |
+                <p>Due: ${todo.dueDate}</p>
+              `;
+      });
+    }
+    return;
   });
 };
 

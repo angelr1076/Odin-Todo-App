@@ -19,6 +19,7 @@ function component() {
 }
 
 document.body.appendChild(component());
+
 // Show list of Projects in sidebar
 renderProjectSidebar();
 renderTodoFromProject();

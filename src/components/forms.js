@@ -1,6 +1,10 @@
 import { createTodo } from './todos';
 import { createProject } from './projects';
-import { renderProjectList, renderProjectSidebar } from './views';
+import {
+  renderProjectList,
+  renderProjectSidebar,
+  renderTodoFromProject,
+} from './views';
 
 const submitProjectForm = element => {
   element.addEventListener('click', e => {
@@ -8,12 +12,13 @@ const submitProjectForm = element => {
     const name =
       document.querySelector('#name').value || 'Auto Generated Project';
     // const projectList = document.querySelector('#project');
-    const todos = [];
+    // const todos = [];
     // Create new project
-    createProject(name, todos);
+    createProject(name);
     renderProjectSidebar();
-    /////////////////////// Once a project is submitted, renderprojectsidebar stops populating project ID in the todos section ///////////////////////
+    /////////////////////// Once a project is submitted, renderprojectsidebar stops populating project properties in the todos section ///////////////////////
   });
+  return;
 };
 
 const submitTodoForm = element => {
@@ -36,7 +41,6 @@ const submitTodoForm = element => {
       dueDate,
       priority,
     });
-    console.log({ title, description, dueDate, priority, projectId });
   });
 };
 
