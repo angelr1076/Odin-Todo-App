@@ -11,11 +11,11 @@ const handleSubmitTodo = () => {
   submitTodoForm(submitTodoBtn);
 };
 
-const handleProjectView = element => {
-  element.addEventListener('click', () => {
-    renderProjectHeader();
-    console.log('handleProjectView fired');
-  });
-};
+// const handleProjectView = element => {
+//   element.addEventListener('click', () => {
+//     renderProjectHeader();
+//     console.log('handleProjectView fired');
+//   });
+// };
 
-export { handleSubmitProject, handleSubmitTodo, handleProjectView };
+export { handleSubmitProject, handleSubmitTodo };

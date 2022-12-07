@@ -19,7 +19,7 @@ document.body.appendChild(component());
 
 // Show list of Projects in sidebar
 renderProjectSidebar();
-// renderProjectHeader();
+renderProjectHeader();
 // Once project is submitted, push it to the projects list
 handleSubmitProject();
 handleSubmitTodo();

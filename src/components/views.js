@@ -2,23 +2,6 @@ import { projectArray } from './projects';
 const projects = projectArray;
 import { handleProjectView } from './eventHandlers';
 
-// Render project list in a dropdown selector
-const renderProjectList = () => {
-  const select = document.querySelector('#projects');
-  const values = projectArray.map(item => item);
-
-  const projectsList = values.forEach(item => {
-    let option = document.createElement('option');
-    option.value = item.name;
-    option.setAttribute('id', item.id);
-    option.setAttribute('class', item.name);
-    option.innerHTML = item.name;
-    select.appendChild(option);
-  });
-
-  return projectsList;
-};
-
 // Render project list in the sidebar
 const renderProjectSidebar = () => {
   const projectList = document.querySelector('#projectList');
@@ -38,6 +21,8 @@ const renderProjectSidebar = () => {
     console.log(projectArray);
   });
 
+  console.log('renderProjectSidebar fired');
+  renderProjectHeader();
   return renderList;
 };
 
@@ -86,15 +71,15 @@ const filterProject = (projectBtn, projectId, header) => {
         todosList.appendChild(li);
         li.setAttribute('class', 'todo-item');
         li.innerHTML = `
-                <h3>Title: ${todo.title}</h3> |
-                <p>Description: ${todo.description}</p> |
-                <p>Priority: ${todo.priority}</p> |
-                <p>Due: ${todo.dueDate}</p>
-              `;
+        <h3>Title: ${todo.title}</h3> |
+        <p>Description: ${todo.description}</p> |
+        <p>Priority: ${todo.priority}</p> |
+        <p>Due: ${todo.dueDate}</p>
+        `;
       });
     }
     return;
   });
 };
 
-export { renderProjectList, renderProjectSidebar, renderProjectHeader };
+export { renderProjectSidebar, renderProjectHeader };
