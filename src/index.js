@@ -1,9 +1,6 @@
+import { renderProjectSidebar, renderProjectHeader } from './components/views';
 import {
-  renderProjectSidebar,
-  renderTodoFromProject,
-} from './components/views';
-import {
-  handleProjectView,
+  // handleProjectView,
   handleSubmitProject,
   handleSubmitTodo,
 } from './components/eventHandlers';
@@ -22,7 +19,7 @@ document.body.appendChild(component());
 
 // Show list of Projects in sidebar
 renderProjectSidebar();
-renderTodoFromProject();
+// renderProjectHeader();
 // Once project is submitted, push it to the projects list
 handleSubmitProject();
 handleSubmitTodo();

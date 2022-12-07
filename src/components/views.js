@@ -1,5 +1,6 @@
 import { projectArray } from './projects';
 const projects = projectArray;
+import { handleProjectView } from './eventHandlers';
 
 // Render project list in a dropdown selector
 const renderProjectList = () => {
@@ -28,7 +29,7 @@ const renderProjectSidebar = () => {
     projectsListItem.setAttribute('class', 'project-listitem');
     const projectBtn = document.createElement('button');
     projectBtn.setAttribute('data-attribute', `${project.id}`);
-    projectBtn.setAttribute('id', 'projectBtn');
+    projectBtn.setAttribute('id', 'projectButton');
     projectBtn.setAttribute('class', 'project-button');
     // Add an anchor for each item
     projectBtn.innerHTML = project.name;
@@ -40,8 +41,8 @@ const renderProjectSidebar = () => {
   return renderList;
 };
 
-// Render todos when selecting project from sidebar list
-const renderTodoFromProject = () => {
+// Render project header and initialize project buttons
+const renderProjectHeader = () => {
   // Grab the project name querySelector
   const projectHeader = document.querySelector('#projectHeader');
   const projectIdField = document.querySelector('#projectId');
@@ -50,8 +51,8 @@ const renderTodoFromProject = () => {
 
   // Grab the project button clicked
   const projectBtn = document.querySelectorAll('button.project-button');
-
   initProjectBtn(projectBtn, todosList, projectIdField, projectHeader);
+  console.log('renderProjectHeader fired');
 };
 
 // Create a list of buttons for each project
@@ -62,12 +63,15 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
       list.innerHTML = '';
       // Search for the projectId in the projectArray
       filterProject(btnId, projectId, header);
+      console.log('initProjectBtn fired');
     });
   });
 };
 
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
+  console.log('filterProject fired');
+
   projects.filter(project => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
@@ -93,4 +97,4 @@ const filterProject = (projectBtn, projectId, header) => {
   });
 };
 
-export { renderProjectList, renderProjectSidebar, renderTodoFromProject };
+export { renderProjectList, renderProjectSidebar, renderProjectHeader };

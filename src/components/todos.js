@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { projectArray } from './projects';
-import { renderTodoFromProject } from './views';
+import { renderProjectHeader } from './views';
 
 let projects = projectArray;
 
@@ -26,7 +26,7 @@ const createTodo = todo => {
     return;
   });
 
-  renderTodoFromProject();
+  renderProjectHeader();
   console.log('Projects from todos module', { projectArray });
 
   return { todoProps };

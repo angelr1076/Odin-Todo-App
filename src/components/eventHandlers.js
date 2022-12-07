@@ -1,5 +1,5 @@
 import { submitProjectForm, submitTodoForm } from './forms';
-import { renderProjectSidebar, renderTodoFromProject } from './views';
+import { renderProjectSidebar, renderProjectHeader } from './views';
 
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');
@@ -13,7 +13,8 @@ const handleSubmitTodo = () => {
 
 const handleProjectView = element => {
   element.addEventListener('click', () => {
-    renderTodoFromProject(projectId);
+    renderProjectHeader();
+    console.log('handleProjectView fired');
   });
 };
 
