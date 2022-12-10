@@ -1,4 +1,4 @@
-import { createTodo } from './todos';
+import { createTodo, removeTodo } from './todos';
 import { createProject } from './projects';
 import { renderProjectSidebar } from './views';
 import { hideElement, showElement } from './showHideElements';
@@ -36,8 +36,6 @@ const submitTodoForm = element => {
   });
 };
 
-const submitEditTodoForm = element => {};
-
 const showTodoForm = () => {
   const todoBtn = document.querySelector('#addTodo');
   const cancelBtn = document.querySelector('#todoCancelBtn');
@@ -53,6 +51,14 @@ const showTodoForm = () => {
   });
 };
 
+const submitTodoDelete = element => {
+  const todoId = element.getAttribute('data-attribute');
+  element.addEventListener('click', e => {
+    e.preventDefault();
+    removeTodo(todoId);
+  });
+};
+
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');
   return submitProjectForm(submitProjectBtn);
@@ -63,14 +69,16 @@ const handleSubmitTodo = () => {
   return submitTodoForm(submitTodoBtn);
 };
 
-// STOPPED HERE
-const handleEditTodo = (element, todo) => {};
+const handleDeleteTodo = id => {
+  const removeTodoBtn = document.querySelector(`#todoDelete-${id}`);
+  return submitTodoDelete(removeTodoBtn);
+};
 
 export {
   submitProjectForm,
   submitTodoForm,
   handleSubmitProject,
   handleSubmitTodo,
-  handleEditTodo,
+  handleDeleteTodo,
   showTodoForm,
 };

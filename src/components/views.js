@@ -1,6 +1,6 @@
+import { handleDeleteTodo } from './handlers';
 import { projectArray } from './projects';
 const projects = projectArray;
-import { handleEditTodo } from './handlers';
 
 // Render project list in the sidebar
 const renderProjectSidebar = () => {
@@ -83,15 +83,6 @@ const filterProject = (projectBtn, projectId, header) => {
   });
 };
 
-const truncateString = str => {
-  const charCount = 20;
-  if (str.length > charCount) {
-    return str.slice(0, charCount) + '...';
-  } else {
-    return str;
-  }
-};
-
 const renderTodos = (todosArray, todosEl) => {
   // Clear the todos list each time the button is pressed
   todosEl.innerHTML = '';
@@ -101,15 +92,30 @@ const renderTodos = (todosArray, todosEl) => {
     // Render the project list in the project ul querySelector
     todosEl.appendChild(li);
     li.setAttribute('class', 'todo-item');
-    handleEditTodo(li, todo);
     li.innerHTML = `
-        <h3 class="todo-title">${todo.title}</h3> |
-        <p class="todo-description" title="${
-          todo.description
-        }">Description: ${truncateString(todo.description)}</p> |
-        <p class-"todo-duedate">Due: ${todo.dueDate}</p>
-        `;
+                <h3 class="todo-title">${todo.title}</h3> |
+                <p class="todo-description" title="${
+                  todo.description
+                }">Description: ${truncateString(todo.description)}</p> |
+                <p class-"todo-duedate">Due: ${todo.dueDate}</p>
+                <button id="todoDelete-${
+                  todo.id
+                }" class="btn todo-delete" data-attribute="${
+      todo.id
+    }">Delete</button>
+              `;
+    handleDeleteTodo(todo.id);
   });
+};
+
+// Helpers
+const truncateString = str => {
+  const charCount = 20;
+  if (str.length > charCount) {
+    return str.slice(0, charCount) + '...';
+  } else {
+    return str;
+  }
 };
 
 export {

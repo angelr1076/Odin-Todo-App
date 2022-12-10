@@ -110,10 +110,12 @@ body {
 
 /* Show hide */
 .hidden {
+  display: none;
   visibility: hidden;
   overflow: hidden;
 }
 
 .show {
+  display: inherit;
   visibility: visible;
 }

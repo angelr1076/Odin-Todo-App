@@ -24,6 +24,10 @@ const createTodo = todo => {
   return { todoProps };
 };
 
+const removeTodo = id => {
+  console.log(id);
+};
+
 const findProject = props => {
   // Push the todo to the project by selected project index
   projects.find(project => {
@@ -35,4 +39,4 @@ const findProject = props => {
   });
 };
 
-export { createTodo };
+export { createTodo, removeTodo };
