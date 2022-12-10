@@ -104,7 +104,7 @@ const renderTodos = (todosArray, todosEl) => {
       todo.id
     }">Delete</button>
               `;
-    handleDeleteTodo(todo.id);
+    handleDeleteTodo(todo);
   });
 };
 

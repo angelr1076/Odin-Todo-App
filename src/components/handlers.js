@@ -69,8 +69,8 @@ const handleSubmitTodo = () => {
   return submitTodoForm(submitTodoBtn);
 };
 
-const handleDeleteTodo = id => {
-  const removeTodoBtn = document.querySelector(`#todoDelete-${id}`);
+const handleDeleteTodo = todo => {
+  const removeTodoBtn = document.querySelector(`#todoDelete-${todo.id}`);
   return submitTodoDelete(removeTodoBtn);
 };
 

@@ -25,7 +25,12 @@ const createTodo = todo => {
 };
 
 const removeTodo = id => {
-  console.log(id);
+  const getTodo = projects.map(project =>
+    project.todos.filter(todo => todo.id !== id),
+  );
+  projects = getTodo;
+  console.log(projects);
+  return projects;
 };
 
 const findProject = props => {
