@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { projectArray } from './projects';
-import { renderProjectHeader } from './views';
+import { filterDefault } from './views';
 
 let projects = projectArray;
 
@@ -15,21 +15,24 @@ const createTodo = todo => {
     title: todo.title,
     description: todo.description,
     dueDate: todo.dueDate,
-    priority: todo.priority,
   };
 
-  // Push the todo to the project by selected project index
-  projects.find(project => {
-    if (project.id === todoProps.projectId) {
-      project.todos.push(todoProps);
-    }
-    return;
-  });
+  findProject(todoProps);
 
-  renderProjectHeader();
   console.log('Projects from todos module', { projectArray });
 
   return { todoProps };
+};
+
+const findProject = props => {
+  // Push the todo to the project by selected project index
+  projects.find(project => {
+    if (project.id === props.projectId) {
+      project.todos.push(props);
+      filterDefault(project.name);
+    }
+    return;
+  });
 };
 
 export { createTodo };

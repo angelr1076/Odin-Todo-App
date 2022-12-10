@@ -1,25 +1,28 @@
-import { renderProjectSidebar, renderProjectHeader } from './components/views';
+import { renderProjectSidebar, loadDefaultProject } from './components/views';
 import {
   // handleProjectView,
   handleSubmitProject,
   handleSubmitTodo,
-} from './components/eventHandlers';
+  showTodoForm,
+} from './components/handlers';
 import './styles/style.css';
 
-function component() {
+const component = () => {
   const mainContainer = document.createElement('div');
   mainContainer.setAttribute('class', 'main-container', 'id', 'mainContainer');
   const mainContent = document.querySelector('#content');
   mainContainer.appendChild(mainContent);
 
   return mainContainer;
-}
+};
 
-document.body.appendChild(component());
-
-// Show list of Projects in sidebar
-renderProjectSidebar();
-renderProjectHeader();
-// Once project is submitted, push it to the projects list
-handleSubmitProject();
-handleSubmitTodo();
+window.addEventListener('load', () => {
+  document.body.appendChild(component());
+  // Show list of Projects in sidebar
+  renderProjectSidebar();
+  loadDefaultProject();
+  showTodoForm();
+  // Once project is submitted, push it to the projects list
+  handleSubmitProject();
+  handleSubmitTodo();
+});

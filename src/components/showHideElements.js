@@ -1,6 +1,6 @@
 const showElement = element => {
-  element.classList.remove('hidden');
-  element.classList.add('show');
+  element.classList.toggle('hidden');
+  element.classList.toggle('show');
 };
 
 const hideElement = element => {

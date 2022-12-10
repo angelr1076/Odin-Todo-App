@@ -6,6 +6,7 @@ const projectArray = [];
 const createProject = name => {
   const id = uuidv4();
   const todos = [];
+
   const projectProps = { id, name, todos };
 
   projectArray.push(projectProps);
