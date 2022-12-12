@@ -1,4 +1,4 @@
-import { handleDeleteTodo } from './handlers';
+import { handleDeleteTodo, handleEditTodo } from './handlers';
 import { getProjects } from './projects';
 
 const projectHeader = document.querySelector('#projectHeader');
@@ -92,6 +92,7 @@ const renderTodos = (todosArray, todosEl) => {
     // Render the project list in the project ul querySelector
     todosEl.appendChild(li);
     li.setAttribute('class', 'todo-item');
+    li.dataset.id = todo.id;
     li.innerHTML = `
                 <h3 class="todo-title">${todo.title}</h3> |
                 <p class="todo-description" title="${
@@ -110,6 +111,7 @@ const renderTodos = (todosArray, todosEl) => {
     }">Delete</button>
               `;
     handleDeleteTodo(todo);
+    handleEditTodo(todo);
   });
 };
 

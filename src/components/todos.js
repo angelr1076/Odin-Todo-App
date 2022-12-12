@@ -32,6 +32,10 @@ const removeTodo = id => {
   renderTodos(projectOnPage.todos, todosList);
 };
 
+const editTodo = id => {
+  console.log(id);
+};
+
 const findProject = todo => {
   // Push the todo to the project by selected project index
   getProjects().find(project => {
@@ -43,4 +47,4 @@ const findProject = todo => {
   });
 };
 
-export { createTodo, removeTodo };
+export { createTodo, removeTodo, editTodo };

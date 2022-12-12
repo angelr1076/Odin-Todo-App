@@ -1,4 +1,4 @@
-import { createTodo, removeTodo } from './todos';
+import { createTodo, removeTodo, editTodo } from './todos';
 import { createProject } from './projects';
 import { renderProjectSidebar } from './views';
 import { hideElement, showElement } from './showHideElements';
@@ -55,7 +55,17 @@ const submitTodoDelete = element => {
   const todoId = element.getAttribute('data-attribute');
   element.addEventListener('click', e => {
     e.preventDefault();
+    // Add delete confirmation
     removeTodo(todoId);
+  });
+};
+
+const submitTodoEdit = element => {
+  const todoId = element.getAttribute('data-attribute');
+  element.addEventListener('click', e => {
+    e.preventDefault();
+    // Add delete confirmation
+    editTodo(todoId);
   });
 };
 
@@ -74,11 +84,17 @@ const handleDeleteTodo = todo => {
   return submitTodoDelete(removeTodoBtn);
 };
 
+const handleEditTodo = todo => {
+  const editTodoBtn = document.querySelector(`#todoEdit-${todo.id}`);
+  return submitTodoEdit(editTodoBtn);
+};
+
 export {
   submitProjectForm,
   submitTodoForm,
   handleSubmitProject,
   handleSubmitTodo,
   handleDeleteTodo,
+  handleEditTodo,
   showTodoForm,
 };
