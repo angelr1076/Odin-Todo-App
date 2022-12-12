@@ -1,3 +1,4 @@
+import { truncateString } from './helpers';
 import { handleDeleteTodo, handleEditTodo } from './handlers';
 import { getProjects } from './projects';
 
@@ -113,16 +114,6 @@ const renderTodos = (todosArray, todosEl) => {
     handleDeleteTodo(todo);
     handleEditTodo(todo);
   });
-};
-
-// Helpers
-const truncateString = str => {
-  const charCount = 20;
-  if (str.length > charCount) {
-    return str.slice(0, charCount) + '...';
-  } else {
-    return str;
-  }
 };
 
 export {
