@@ -1,13 +1,14 @@
 import { handleDeleteTodo } from './handlers';
-import { projectArray } from './projects';
-const projects = projectArray;
+import { getProjects } from './projects';
+
+const projectHeader = document.querySelector('#projectHeader');
 
 // Render project list in the sidebar
 const renderProjectSidebar = () => {
   const projectList = document.querySelector('#projectList');
   projectList.innerHTML = '';
 
-  const renderList = projectArray.forEach(project => {
+  const renderList = getProjects().forEach(project => {
     const projectsListItem = document.createElement('li');
     projectsListItem.setAttribute('class', 'project-listitem');
     const projectBtn = document.createElement('button');
@@ -31,13 +32,12 @@ const loadDefaultProject = () => {
 };
 
 const filterDefault = projectName => {
-  const projectHeader = document.querySelector('#projectHeader');
-  const todosList = document.querySelector('#todosList');
-
-  projects.filter(project => {
+  getProjects().filter(project => {
     if (projectName === project.name) {
+      const todosList = document.querySelector('#todosList');
+      projectHeader.dataset.id = project.id;
       // Render the project name in the project name querySelector
-      projectHeader.innerHTML = project.name;
+      projectHeader.innerHTML = `${project.name} ${projectHeader.dataset.id}`;
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
@@ -51,7 +51,6 @@ const renderProjectHeader = () => {
   const projectBtn = document.querySelectorAll('button.project-button');
   const todosList = document.querySelector('#todosList');
   const projectIdField = document.querySelector('#projectId');
-  const projectHeader = document.querySelector('#projectHeader');
 
   initProjectBtn(projectBtn, todosList, projectIdField, projectHeader);
 };
@@ -71,10 +70,11 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
 
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
-  projects.filter(project => {
+  getProjects().filter(project => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
-      header.innerHTML = project.name;
+      projectHeader.dataset.id = project.id;
+      header.innerHTML = `${project.name} ${projectHeader.dataset.id}`;
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
@@ -98,6 +98,11 @@ const renderTodos = (todosArray, todosEl) => {
                   todo.description
                 }">Description: ${truncateString(todo.description)}</p> |
                 <p class-"todo-duedate">Due: ${todo.dueDate}</p>
+                <button id="todoEdit-${
+                  todo.id
+                }" class="btn todo-edit" data-attribute="${
+      todo.id
+    }">Edit</button>
                 <button id="todoDelete-${
                   todo.id
                 }" class="btn todo-delete" data-attribute="${
@@ -121,6 +126,7 @@ const truncateString = str => {
 export {
   renderProjectSidebar,
   renderProjectHeader,
+  renderTodos,
   loadDefaultProject,
   filterDefault,
 };
