@@ -51,6 +51,19 @@ const showTodoForm = () => {
   });
 };
 
+const editTodoForm = todo => {
+  // Form for todo
+  //  id,
+  //   projectId,
+  //   title: todo.title,
+  //   description: todo.description,
+  //   dueDate: todo.dueDate,
+  const todoForm = document.createElement('form');
+  const todoTitle = document.createElement('input');
+  const todoDescription = document.createElement('textarea');
+  // Inject into todo li
+};
+
 const submitTodoDelete = element => {
   const todoId = element.getAttribute('data-attribute');
   element.addEventListener('click', e => {
@@ -64,7 +77,7 @@ const submitTodoEdit = element => {
   const todoId = element.getAttribute('data-attribute');
   element.addEventListener('click', e => {
     e.preventDefault();
-    // Add delete confirmation
+
     editTodo(todoId);
   });
 };

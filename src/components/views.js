@@ -38,7 +38,7 @@ const filterDefault = projectName => {
       const todosList = document.querySelector('#todosList');
       projectHeader.dataset.id = project.id;
       // Render the project name in the project name querySelector
-      projectHeader.innerHTML = `${project.name} ${projectHeader.dataset.id}`;
+      projectHeader.textContent = project.name;
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
@@ -75,7 +75,7 @@ const filterProject = (projectBtn, projectId, header) => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
       projectHeader.dataset.id = project.id;
-      header.innerHTML = `${project.name} ${projectHeader.dataset.id}`;
+      header.textContent = project.name;
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;

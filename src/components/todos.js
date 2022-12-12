@@ -33,6 +33,8 @@ const removeTodo = id => {
 };
 
 const editTodo = id => {
+  // Get todo by data-id attribute
+  // Replace todo element with edit todo form
   console.log(id);
 };
 

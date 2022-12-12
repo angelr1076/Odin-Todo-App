@@ -57,22 +57,22 @@
             <form action="" id="todoForm" class="todo-form" name="todoForm">
               <div class="form-row">
                 <label for="title" class="label">Title</label>
-                <input type="text" id="title" class="title">
+                <input type="text" id="title" class="title" name="title">
               </div>
               <div class="form-row">
                 <label for="description" class="label">Description</label>
-                <input type="text" id="description" class="description">
+                <textarea id="description" class="description" name="description" rows="4" cols="50">
               </div>
               <div class="form-row">
                 <label for="date" class="label">Due Date</label>
-                <input type="date" id="dueDate" class="date">
+                <input type="date" id="dueDate" class="date" name="date">
               </div>
               <div class="form-row">
                 <label for="priority" class="label">Priority</label>
-                <input type="number" id="priority" class="priority" min="1" max="3">
+                <input type="number" id="priority" class="priority" name="priority" min="1" max="3">
               </div>
               <div class="form-row">
-                <input type="text" id="projectId" hidden>
+                <input type="text" id="projectId">
               </div>
               <div class="form-row">
                 <input type="Submit" id="todoSubmitBtn" class="create-todo">
