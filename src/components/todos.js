@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { projectArray } from './projects';
-import { filterDefault } from './views';
-
-let projects = projectArray;
+import { getProjects } from './projects';
+import { filterDefault, renderTodos } from './views';
 
 // Create a new todo
 const createTodo = todo => {
@@ -19,20 +17,26 @@ const createTodo = todo => {
 
   findProject(todoProps);
 
-  console.log('Projects from todos module', { projectArray });
+  console.log('Projects from todos module', getProjects());
 
   return { todoProps };
 };
 
 const removeTodo = id => {
-  console.log(id);
+  let projectHeader = document.getElementById('projectHeader');
+  const todosList = document.querySelector('#todosList');
+  let projectId = projectHeader.dataset.id;
+  let projectOnPage = getProjects().find(item => item.id === projectId);
+
+  projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
+  renderTodos(projectOnPage.todos, todosList);
 };
 
-const findProject = props => {
+const findProject = todo => {
   // Push the todo to the project by selected project index
-  projects.find(project => {
-    if (project.id === props.projectId) {
-      project.todos.push(props);
+  getProjects().find(project => {
+    if (project.id === todo.projectId) {
+      project.todos.push(todo);
       filterDefault(project.name);
     }
     return;
