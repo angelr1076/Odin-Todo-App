@@ -1,9 +1,13 @@
-import { createTodo, removeTodo } from './todos';
+import { createTodo, editTodo, removeTodo } from './todos';
 import { createProject } from './projects';
 import { renderProjectSidebar } from './views';
 import { hideElement, showElement } from './showHideElements';
+import { setAttributes } from './helpers';
 import { format, compareAsc, add } from 'date-fns';
 
+const todoForm = document.querySelector('#addTodoForm');
+
+// Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
@@ -16,6 +20,7 @@ const submitProjectForm = element => {
   return;
 };
 
+// Add todo form - when the submit button is chosen, create todo and hide form
 const submitTodoForm = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
@@ -33,13 +38,14 @@ const submitTodoForm = element => {
       description,
       dueDate,
     });
+    hideElement(todoForm);
   });
 };
 
+// Show and hide the add todo form and toggle the show/hide when the + todo button is clicked
 const showTodoForm = () => {
   const todoBtn = document.querySelector('#addTodo');
   const cancelBtn = document.querySelector('#todoCancelBtn');
-  const todoForm = document.querySelector('#todoFormCont');
   todoBtn.addEventListener(
     'click',
     () =>
@@ -59,6 +65,14 @@ const submitTodoDelete = element => {
   });
 };
 
+const showEditTodoForm = (element, todo) => {
+  // const todoId = element.getAttribute('data-attribute');
+  element.addEventListener('click', e => {
+    e.preventDefault();
+    editTodo(todo);
+  });
+};
+
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');
   return submitProjectForm(submitProjectBtn);
@@ -74,11 +88,17 @@ const handleDeleteTodo = todo => {
   return submitTodoDelete(removeTodoBtn);
 };
 
+const handleShowEdit = todo => {
+  const editTodoBtn = document.querySelector(`#todoEdit-${todo.id}`);
+  return showEditTodoForm(editTodoBtn, todo);
+};
+
 export {
   submitProjectForm,
   submitTodoForm,
   handleSubmitProject,
   handleSubmitTodo,
   handleDeleteTodo,
+  handleShowEdit,
   showTodoForm,
 };

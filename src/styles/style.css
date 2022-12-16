@@ -24,6 +24,10 @@ body {
   font-family: var(--mont);
 }
 
+li {
+  list-style-type: none;
+}
+
 .content {
   /* background-color: gray; */
   height: 100vh;
@@ -85,18 +89,18 @@ body {
   flex: 6;
 }
 
-.todo-item {
+.todo-container {
   display: flex;
   padding: 1em;
   margin: 1em;
   gap: 1.5em;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   align-items: center;
   background-color: #fff;
 }
 
-.form-container {
-  display: flex;
+.addtodo-container {
+  /* display: flex; */
   visibility: hidden;
   flex-direction: column;
   align-items: stretch;
@@ -119,3 +123,4 @@ body {
   display: inherit;
   visibility: visible;
 }
+
