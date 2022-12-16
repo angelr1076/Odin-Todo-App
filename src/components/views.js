@@ -1,4 +1,5 @@
-import { handleDeleteTodo } from './handlers';
+import { handleDeleteTodo, handleShowEdit } from './handlers';
+import { truncateString, setAttributes } from './helpers';
 import { getProjects } from './projects';
 
 const projectHeader = document.querySelector('#projectHeader');
@@ -37,7 +38,7 @@ const filterDefault = projectName => {
       const todosList = document.querySelector('#todosList');
       projectHeader.dataset.id = project.id;
       // Render the project name in the project name querySelector
-      projectHeader.innerHTML = `${project.name} ${projectHeader.dataset.id}`;
+      projectHeader.textContent = project.name;
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
@@ -74,13 +75,36 @@ const filterProject = (projectBtn, projectId, header) => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
       projectHeader.dataset.id = project.id;
-      header.innerHTML = `${project.name} ${projectHeader.dataset.id}`;
+      header.textContent = project.name;
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
       renderTodos(todos, todosList);
     }
   });
+};
+
+const todoEl = todo => {
+  const todoHTML = `
+            <div id="todoContainer" class="todo-container">
+                <h3 class="todo-title">${todo.title}</h3>
+                <p class="todo-description" title="${
+                  todo.description
+                }">Description: ${truncateString(todo.description)}</p>
+                <p class-"todo-duedate">Due: ${todo.dueDate}</p>
+                <button id="todoEdit-${
+                  todo.id
+                }" class="btn todo-edit" data-attribute="${
+    todo.id
+  }">Edit</button>
+                <button id="todoDelete-${
+                  todo.id
+                }" class="btn todo-delete" data-attribute="${
+    todo.id
+  }">Delete</button>
+           </div>
+              `;
+  return todoHTML;
 };
 
 const renderTodos = (todosArray, todosEl) => {
@@ -91,36 +115,12 @@ const renderTodos = (todosArray, todosEl) => {
     let li = document.createElement('li');
     // Render the project list in the project ul querySelector
     todosEl.appendChild(li);
+    li.setAttribute('id', `todoItem-${todo.id}`);
     li.setAttribute('class', 'todo-item');
-    li.innerHTML = `
-                <h3 class="todo-title">${todo.title}</h3> |
-                <p class="todo-description" title="${
-                  todo.description
-                }">Description: ${truncateString(todo.description)}</p> |
-                <p class-"todo-duedate">Due: ${todo.dueDate}</p>
-                <button id="todoEdit-${
-                  todo.id
-                }" class="btn todo-edit" data-attribute="${
-      todo.id
-    }">Edit</button>
-                <button id="todoDelete-${
-                  todo.id
-                }" class="btn todo-delete" data-attribute="${
-      todo.id
-    }">Delete</button>
-              `;
+    li.innerHTML = todoEl(todo);
     handleDeleteTodo(todo);
+    handleShowEdit(todo);
   });
-};
-
-// Helpers
-const truncateString = str => {
-  const charCount = 20;
-  if (str.length > charCount) {
-    return str.slice(0, charCount) + '...';
-  } else {
-    return str;
-  }
 };
 
 export {
