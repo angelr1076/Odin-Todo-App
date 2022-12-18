@@ -7,6 +7,10 @@ import { format, compareAsc, add } from 'date-fns';
 
 const todoForm = document.querySelector('#addTodoForm');
 
+const btnOpenModal = document.querySelector('.open-modal');
+const btnCloseModal = document.querySelector('.close-modal');
+const modalElement = document.querySelector('.edit-modal');
+
 // Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
   element.addEventListener('click', e => {
@@ -65,11 +69,23 @@ const submitTodoDelete = element => {
   });
 };
 
+const addClass = () => {
+  modalElement.classList.remove('hidden');
+  modalElement.classList.add('open');
+};
+
+const removeClass = () => {
+  modalElement.classList.remove('open');
+};
+
+btnOpenModal.addEventListener('click', addClass);
+btnCloseModal.addEventListener('click', removeClass);
+
 const showEditTodoForm = (element, todo) => {
-  // const todoId = element.getAttribute('data-attribute');
   element.addEventListener('click', e => {
     e.preventDefault();
     editTodo(todo);
+    addClass();
   });
 };
 

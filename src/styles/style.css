@@ -106,7 +106,91 @@ li {
   align-items: stretch;
 }
 
-/* Added classes */
+/* Modal */
+.edit-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.open-modal {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid var(--dimBlack);
+  transition: all 0.2s linear;
+  text-transform: uppercase;
+}
+
+.open-modal:hover {
+  background: rgba(241, 238, 238, 0.8);
+}
+
+.edit-modal.open {
+  display: flex;
+}
+
+.edit-form {
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.form-row>label {
+  font-size: 1rem;
+  margin-bottom: .5em;
+  margin-top: 1em;
+  text-transform: capitalize;
+}
+
+input[type="text"], input[type="number"] {
+  height: 3em;
+  padding-left: .75em;
+}
+
+input[type="checkbox"] {
+  height: 1.5em;
+}
+
+.modal-container {
+  background-color: #fff;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.edit-modal.open .modal-container {
+  animation: move 0.8s ease-in-out;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(-500px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+
+/* Addtional classes */
 .flex {
   display: flex;
   justify-content: center;
