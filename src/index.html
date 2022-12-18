@@ -45,8 +45,33 @@
         </div>
         <div id="todosContainer" class="todos-container lower-container__right">
           <!-- Project name -->
-          <!-- Insert project ID as data-attribute -->
-          <h2 id="projectHeader" class="project-header"></h2>    
+          <!-- Hidden project ID as data-attribute -->
+          <h2 id="projectHeader" class="project-header"></h2>   
+          <!-- Edit todos modal -->
+          <section class="edit-modal hidden">
+            <div class="modal-container">
+              <h3>Edit Todo</h3>
+              <form action="" name="editForm" id="editForm" class="edit-form">
+                <div class="form-row">
+                  <label for="editTitle" class="label">Title</label>
+                  <input type="text" id="editTitle" class="edit-title" name="editTitle">
+                </div>
+                <div class="form-row">
+                  <label for="editDesc" class="label">Description</label>
+                  <textarea type="text" id="editDesc" class="edit-desc" name="editDesc" rows="5" cols="33"></textarea>
+                </div>
+                <div class="form-row">
+                  <label for="editDate" class="label">Due Date</label>
+                  <input type="date" id="editDate" class="edit-date" name="editDate">
+                </div>
+                <div class="button-container">
+                  <button type="button" id="editTodoSubmitBtn" class="btn edit-todo">Edit Todo</button>
+                  <button type="button" id="closeModal" class="btn close-modal cancel">Cancel</button>
+                </div>
+              </form>
+              <button class="addBtn open-modal" id="open-modal"></button>
+            </div>
+          </section>
           <ul id="todosList" class="todos-list">
             <!-- Project's todos injected here -->
           </ul> 
@@ -74,8 +99,8 @@
                 <input type="text" id="projectId" name="projectId" hidden>
               </div>
               <div class="form-row">
-                <input type="Submit" id="todoSubmitBtn" class="btn create-todo">
-                <input type="Submit" id="todoCancelBtn" class="btn cancel-todo" value="Cancel">
+                <button type="Submit" id="todoSubmitBtn" class="btn create-todo">Create Todo</button>
+                <button type="Submit" id="todoCancelBtn" class="btn cancel-todo" value="Cancel">Cancel</button>
               </div>
             </form>
           </div>

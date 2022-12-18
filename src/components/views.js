@@ -86,23 +86,21 @@ const filterProject = (projectBtn, projectId, header) => {
 
 const todoEl = todo => {
   const todoHTML = `
-            <div id="todoContainer" class="todo-container">
-                <h3 class="todo-title">${todo.title}</h3>
-                <p class="todo-description" title="${
-                  todo.description
-                }">Description: ${truncateString(todo.description)}</p>
-                <p class-"todo-duedate">Due: ${todo.dueDate}</p>
-                <button id="todoEdit-${
-                  todo.id
-                }" class="btn todo-edit" data-attribute="${
-    todo.id
-  }">Edit</button>
-                <button id="todoDelete-${
-                  todo.id
-                }" class="btn todo-delete" data-attribute="${
+    <div id="todoContainer" class="todo-container">
+        <h3 class="todo-title">${todo.title}</h3>
+        <p class="todo-description" title="${
+          todo.description
+        }">Description: ${truncateString(todo.description)}</p>
+        <p class-"todo-duedate">Due: ${todo.dueDate}</p>
+        <button id="todoEdit-${
+          todo.id
+        }" class="btn todo-edit" data-attribute="${todo.id}">Edit</button>
+                    <button id="todoDelete-${
+                      todo.id
+                    }" class="btn todo-delete" data-attribute="${
     todo.id
   }">Delete</button>
-           </div>
+    </div>
               `;
   return todoHTML;
 };
