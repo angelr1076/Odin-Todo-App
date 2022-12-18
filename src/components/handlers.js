@@ -1,15 +1,14 @@
 import { createTodo, editTodo, removeTodo } from './todos';
 import { createProject } from './projects';
-import { renderProjectSidebar } from './views';
-import { hideElement, showElement } from './showHideElements';
+import { renderProjectSidebar, initEditTodo } from './views';
+import { hideElement, showElement, toggleModal } from './showHideElements';
 import { setAttributes } from './helpers';
 import { format, compareAsc, add } from 'date-fns';
 
 const todoForm = document.querySelector('#addTodoForm');
 
-const btnOpenModal = document.querySelector('.open-modal');
-const btnCloseModal = document.querySelector('.close-modal');
-const modalElement = document.querySelector('.edit-modal');
+const btnOpenModal = document.querySelector('#openModal');
+const btnCloseModal = document.querySelector('#closeModal');
 
 // Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
@@ -69,23 +68,15 @@ const submitTodoDelete = element => {
   });
 };
 
-const addClass = () => {
-  modalElement.classList.remove('hidden');
-  modalElement.classList.add('open');
-};
-
-const removeClass = () => {
-  modalElement.classList.remove('open');
-};
-
-btnOpenModal.addEventListener('click', addClass);
-btnCloseModal.addEventListener('click', removeClass);
+btnOpenModal.addEventListener('click', toggleModal);
+btnCloseModal.addEventListener('click', toggleModal);
 
 const showEditTodoForm = (element, todo) => {
   element.addEventListener('click', e => {
     e.preventDefault();
     editTodo(todo);
-    addClass();
+    initEditTodo(todo.id); // left off here find out how to get todo id
+    toggleModal();
   });
 };
 

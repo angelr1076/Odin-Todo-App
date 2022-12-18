@@ -121,10 +121,31 @@ const renderTodos = (todosArray, todosEl) => {
   });
 };
 
+const initEditTodo = todoId => {
+  const titleField = document.querySelector('#editTitle');
+  const descField = document.querySelector('#editDesc');
+  const dateField = document.querySelector('#editDate');
+
+  // Get todos from id
+  const projectId = projectHeader.dataset.id;
+  let projectOnPage = getProjects().find(project => project.id === projectId);
+  const todoToEdit = projectOnPage.todos.filter(todo => todo.id === todoId);
+  console.log(todoToEdit);
+
+  if (!todoToEdit) {
+    return;
+  }
+
+  titleField.value = todoToEdit[0].title;
+  descField.value = todoToEdit[0].description;
+  dateField.value = todoToEdit[0].dueDate;
+};
+
 export {
   renderProjectSidebar,
   renderProjectHeader,
   renderTodos,
   loadDefaultProject,
   filterDefault,
+  initEditTodo,
 };

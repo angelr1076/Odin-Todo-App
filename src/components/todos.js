@@ -15,7 +15,7 @@ const createTodo = todo => {
     dueDate: todo.dueDate,
   };
 
-  findProject(todoProps);
+  pushTodo(todoProps);
 
   console.log('Projects from todos module', getProjects());
 
@@ -26,9 +26,10 @@ const removeTodo = id => {
   let projectHeader = document.getElementById('projectHeader');
   const todosList = document.querySelector('#todosList');
   let projectId = projectHeader.dataset.id;
-  let projectOnPage = getProjects().find(item => item.id === projectId);
 
+  let projectOnPage = getProjects().find(item => item.id === projectId);
   projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
+
   renderTodos(projectOnPage.todos, todosList);
 };
 
@@ -39,7 +40,7 @@ const editTodo = id => {
   console.log(id);
 };
 
-const findProject = todo => {
+const pushTodo = todo => {
   // Push the todo to the project by selected project index
   getProjects().find(project => {
     if (project.id === todo.projectId) {
