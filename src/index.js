@@ -22,7 +22,6 @@ window.addEventListener('load', () => {
   renderProjectSidebar();
   loadDefaultProject();
   showTodoForm();
-  // Once project is submitted, push it to the projects list
   handleSubmitProject();
   handleSubmitTodo();
 });

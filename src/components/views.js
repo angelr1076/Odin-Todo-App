@@ -1,15 +1,17 @@
-import { handleDeleteTodo, handleShowEdit } from './handlers';
-import { truncateString, setAttributes } from './helpers';
+import { handleDeleteTodo, handleShowEdit, handleEditTodo } from './handlers';
+import { truncateString, findTodo } from './helpers';
+import { updateTodo } from './todos';
 import { getProjects } from './projects';
 
 const projectHeader = document.querySelector('#projectHeader');
+const projects = getProjects();
 
 // Render project list in the sidebar
 const renderProjectSidebar = () => {
   const projectList = document.querySelector('#projectList');
   projectList.innerHTML = '';
 
-  const renderList = getProjects().forEach(project => {
+  const renderList = projects.forEach(project => {
     const projectsListItem = document.createElement('li');
     projectsListItem.setAttribute('class', 'project-listitem');
     const projectBtn = document.createElement('button');
@@ -33,7 +35,7 @@ const loadDefaultProject = () => {
 };
 
 const filterDefault = projectName => {
-  getProjects().filter(project => {
+  projects.filter(project => {
     if (projectName === project.name) {
       const todosList = document.querySelector('#todosList');
       projectHeader.dataset.id = project.id;
@@ -71,7 +73,7 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
 
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
-  getProjects().filter(project => {
+  projects.filter(project => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
       projectHeader.dataset.id = project.id;
@@ -116,9 +118,24 @@ const renderTodos = (todosArray, todosEl) => {
     li.setAttribute('id', `todoItem-${todo.id}`);
     li.setAttribute('class', 'todo-item');
     li.innerHTML = todoEl(todo);
+
     handleDeleteTodo(todo);
     handleShowEdit(todo);
   });
+};
+
+const initEditTodo = todoId => {
+  let titleField = document.querySelector('#editTitle');
+  let descField = document.querySelector('#editDesc');
+  let dateField = document.querySelector('#editDate');
+  let todoIdField = document.querySelector('#todoId');
+
+  titleField.value = findTodo(projects, todoId).title;
+  descField.value = findTodo(projects, todoId).description;
+  dateField.value = findTodo(projects, todoId).dueDate;
+  todoIdField.value = todoId;
+
+  handleEditTodo();
 };
 
 export {
@@ -127,4 +144,5 @@ export {
   renderTodos,
   loadDefaultProject,
   filterDefault,
+  initEditTodo,
 };

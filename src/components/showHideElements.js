@@ -8,4 +8,16 @@ const hideElement = element => {
   element.classList.add('hidden');
 };
 
-export { showElement, hideElement };
+const toggleModal = () => {
+  const modalElement = document.querySelector('.edit-modal');
+  modalElement.classList.toggle('hidden');
+  modalElement.classList.toggle('open');
+};
+
+const closeModal = () => {
+  const modalElement = document.querySelector('.edit-modal');
+  modalElement.classList.remove('open');
+  modalElement.classList.add('hidden');
+};
+
+export { showElement, hideElement, toggleModal, closeModal };
