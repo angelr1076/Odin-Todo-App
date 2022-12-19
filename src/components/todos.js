@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getProjects } from './projects';
+import { findTodo } from './helpers';
 import { filterDefault, renderTodos } from './views';
+import { toggleModal } from './showHideElements';
+
+const projects = getProjects();
 
 // Create a new todo
 const createTodo = todo => {
@@ -17,8 +21,6 @@ const createTodo = todo => {
 
   pushTodo(todoProps);
 
-  console.log('Projects from todos module', getProjects());
-
   return { todoProps };
 };
 
@@ -26,23 +28,38 @@ const removeTodo = id => {
   let projectHeader = document.getElementById('projectHeader');
   const todosList = document.querySelector('#todosList');
   let projectId = projectHeader.dataset.id;
+  let projectOnPage = projects.find(item => item.id === projectId);
 
-  let projectOnPage = getProjects().find(item => item.id === projectId);
   projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
 
   renderTodos(projectOnPage.todos, todosList);
 };
 
-const editTodo = id => {
-  // Get todo by data-id attribute
-  // Replace todo element with edit todo form
-  // Submit todo edit form
-  console.log(id);
+const updateTodo = (id, updates) => {
+  const todo = findTodo(projects, id);
+  let projectHeader = document.getElementById('projectHeader');
+  const todosList = document.querySelector('#todosList');
+  let projectId = projectHeader.dataset.id;
+  let projectOnPage = projects.find(item => item.id === projectId);
+
+  if (typeof updates.title === 'string') {
+    todo.title = updates.title;
+  }
+  if (typeof updates.description === 'string') {
+    todo.description = updates.description;
+  }
+  if (typeof updates.dueDate === 'string') {
+    todo.dueDate = updates.dueDate;
+  }
+
+  renderTodos(projectOnPage.todos, todosList);
+
+  return todo;
 };
 
 const pushTodo = todo => {
   // Push the todo to the project by selected project index
-  getProjects().find(project => {
+  projects.find(project => {
     if (project.id === todo.projectId) {
       project.todos.push(todo);
       filterDefault(project.name);
@@ -51,4 +68,4 @@ const pushTodo = todo => {
   });
 };
 
-export { createTodo, removeTodo, editTodo };
+export { createTodo, removeTodo, updateTodo };

@@ -14,4 +14,10 @@ const toggleModal = () => {
   modalElement.classList.toggle('open');
 };
 
-export { showElement, hideElement, toggleModal };
+const closeModal = () => {
+  const modalElement = document.querySelector('.edit-modal');
+  modalElement.classList.remove('open');
+  modalElement.classList.add('hidden');
+};
+
+export { showElement, hideElement, toggleModal, closeModal };

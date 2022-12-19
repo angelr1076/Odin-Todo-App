@@ -1,14 +1,19 @@
-import { createTodo, editTodo, removeTodo } from './todos';
-import { createProject } from './projects';
-import { renderProjectSidebar, initEditTodo } from './views';
-import { hideElement, showElement, toggleModal } from './showHideElements';
+import { createTodo, updateTodo, removeTodo } from './todos';
+import { createProject, getProjects } from './projects';
+import { renderProjectSidebar, initEditTodo, renderTodos } from './views';
+import {
+  hideElement,
+  showElement,
+  toggleModal,
+  closeModal,
+} from './showHideElements';
 import { setAttributes } from './helpers';
 import { format, compareAsc, add } from 'date-fns';
 
 const todoForm = document.querySelector('#addTodoForm');
-
-const btnOpenModal = document.querySelector('#openModal');
-const btnCloseModal = document.querySelector('#closeModal');
+const projects = getProjects();
+const btnOpenModal = document.querySelector('.open-modal');
+const btnCloseModal = document.querySelector('.close-modal');
 
 // Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
@@ -33,7 +38,7 @@ const submitTodoForm = element => {
     const description =
       document.querySelector('#description').value ||
       'Macaroon gummi bears cake pie cheesecake oat cake. Cheesecake sweet roll topping jelly-o muffin I love.';
-    const dueDate = document.querySelector('#dueDate').value || '01/01/2030';
+    const dueDate = document.querySelector('#dueDate').value || '2030-01-01';
 
     createTodo({
       projectId,
@@ -41,6 +46,7 @@ const submitTodoForm = element => {
       description,
       dueDate,
     });
+
     hideElement(todoForm);
   });
 };
@@ -74,9 +80,30 @@ btnCloseModal.addEventListener('click', toggleModal);
 const showEditTodoForm = (element, todo) => {
   element.addEventListener('click', e => {
     e.preventDefault();
-    editTodo(todo);
-    initEditTodo(todo.id); // left off here find out how to get todo id
+    initEditTodo(todo.id);
     toggleModal();
+  });
+};
+
+const submitTodoEdit = element => {
+  element.addEventListener('click', e => {
+    e.preventDefault();
+
+    const titleField = document.querySelector('#editTitle').value;
+    const descField = document.querySelector('#editDesc').value;
+    const dateField = document.querySelector('#editDate').value;
+    const todoId = document.querySelector('#todoId').value;
+
+    const todo = updateTodo(todoId, {
+      title: titleField,
+      description: descField,
+      dueDate: dateField,
+    });
+
+    // Close modal
+    closeModal();
+
+    return todo;
   });
 };
 
@@ -100,6 +127,11 @@ const handleShowEdit = todo => {
   return showEditTodoForm(editTodoBtn, todo);
 };
 
+const handleEditTodo = () => {
+  const submitEditBtn = document.querySelector('#editTodoSubmitBtn');
+  return submitTodoEdit(submitEditBtn);
+};
+
 export {
   submitProjectForm,
   submitTodoForm,
@@ -108,4 +140,5 @@ export {
   handleDeleteTodo,
   handleShowEdit,
   showTodoForm,
+  handleEditTodo,
 };
