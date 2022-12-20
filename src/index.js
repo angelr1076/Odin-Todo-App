@@ -24,4 +24,5 @@ window.addEventListener('load', () => {
   showTodoForm();
   handleSubmitProject();
   handleSubmitTodo();
+  // localStorage.clear();
 });

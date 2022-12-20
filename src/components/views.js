@@ -1,7 +1,7 @@
 import { handleDeleteTodo, handleShowEdit, handleEditTodo } from './handlers';
 import { truncateString, findTodo } from './helpers';
 import { updateTodo } from './todos';
-import { getProjects, loadProjects } from './projects';
+import { createProject, getProjects, loadProjects } from './projects';
 
 const projectHeader = document.querySelector('#projectHeader');
 const projects = getProjects();
@@ -23,7 +23,6 @@ const renderProjectSidebar = () => {
     projectsListItem.append(projectBtn);
     projectList.append(projectsListItem);
   });
-
   renderProjectHeader();
   return renderList;
 };
