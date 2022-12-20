@@ -1,5 +1,5 @@
 import { createTodo, updateTodo, removeTodo } from './todos';
-import { createProject, getProjects } from './projects';
+import { createProject, saveProjects } from './projects';
 import { renderProjectSidebar, initEditTodo, renderTodos } from './views';
 import {
   hideElement,
@@ -7,11 +7,8 @@ import {
   toggleModal,
   closeModal,
 } from './showHideElements';
-import { setAttributes } from './helpers';
-import { format, compareAsc, add } from 'date-fns';
 
 const todoForm = document.querySelector('#addTodoForm');
-const projects = getProjects();
 const btnOpenModal = document.querySelector('.open-modal');
 const btnCloseModal = document.querySelector('.close-modal');
 
@@ -23,6 +20,7 @@ const submitProjectForm = element => {
       document.querySelector('#name').value || 'Auto Generated Project';
 
     createProject(name);
+    saveProjects();
     renderProjectSidebar();
   });
   return;
@@ -46,6 +44,7 @@ const submitTodoForm = element => {
       description,
       dueDate,
     });
+    saveProjects();
 
     hideElement(todoForm);
   });
@@ -71,6 +70,7 @@ const submitTodoDelete = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
     removeTodo(todoId);
+    saveProjects();
   });
 };
 
@@ -100,6 +100,7 @@ const submitTodoEdit = element => {
       dueDate: dateField,
     });
 
+    saveProjects();
     // Close modal
     closeModal();
 

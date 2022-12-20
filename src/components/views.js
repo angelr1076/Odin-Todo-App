@@ -1,7 +1,7 @@
 import { handleDeleteTodo, handleShowEdit, handleEditTodo } from './handlers';
 import { truncateString, findTodo } from './helpers';
 import { updateTodo } from './todos';
-import { getProjects } from './projects';
+import { getProjects, loadProjects } from './projects';
 
 const projectHeader = document.querySelector('#projectHeader');
 const projects = getProjects();
@@ -55,6 +55,7 @@ const renderProjectHeader = () => {
   const todosList = document.querySelector('#todosList');
   const projectIdField = document.querySelector('#projectId');
 
+  loadProjects();
   initProjectBtn(projectBtn, todosList, projectIdField, projectHeader);
 };
 

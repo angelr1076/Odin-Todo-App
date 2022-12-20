@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { getProjects } from './projects';
+import { getProjects, saveProjects } from './projects';
 import { findTodo } from './helpers';
 import { filterDefault, renderTodos } from './views';
-import { toggleModal } from './showHideElements';
 
 const projects = getProjects();
 
@@ -20,6 +19,7 @@ const createTodo = todo => {
   };
 
   pushTodo(todoProps);
+  saveProjects();
 
   return { todoProps };
 };
@@ -31,7 +31,7 @@ const removeTodo = id => {
   let projectOnPage = projects.find(item => item.id === projectId);
 
   projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
-
+  saveProjects();
   renderTodos(projectOnPage.todos, todosList);
 };
 
@@ -51,6 +51,8 @@ const updateTodo = (id, updates) => {
   if (typeof updates.dueDate === 'string') {
     todo.dueDate = updates.dueDate;
   }
+
+  saveProjects();
 
   renderTodos(projectOnPage.todos, todosList);
 

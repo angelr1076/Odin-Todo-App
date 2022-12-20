@@ -1,6 +1,21 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const projects = [];
+let projects = [];
+
+const loadProjects = () => {
+  const projectsJSON = localStorage.getItem('projects');
+
+  try {
+    return projectsJSON ? JSON.parse(projectsJSON) : [];
+  } catch (e) {
+    return [];
+  }
+};
+
+// Save the project(s) to localStorage
+const saveProjects = () => {
+  localStorage.setItem('projects', JSON.stringify(projects));
+};
 
 // Create a new project
 const createProject = name => {
@@ -9,14 +24,16 @@ const createProject = name => {
 
   const projectProps = { id, name, todos };
 
-  getProjects().push(projectProps);
-  console.log('projects from projects module', getProjects());
+  projects.push(projectProps);
+  saveProjects();
   return projectProps;
 };
 
 const getProjects = () => projects;
 
-const defaultProject = createProject('Personal');
-const defaultProject2 = createProject('Business');
+// const defaultProject = createProject('Personal');
+// const defaultProject2 = createProject('Work');
 
-export { createProject, getProjects };
+projects = loadProjects();
+
+export { createProject, getProjects, saveProjects, loadProjects };
