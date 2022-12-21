@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { warningMsg } from './views';
 
 let projects = [];
 
@@ -6,7 +7,15 @@ const loadProjects = () => {
   const projectsJSON = localStorage.getItem('projects');
 
   try {
-    return projectsJSON ? JSON.parse(projectsJSON) : [];
+    return projectsJSON
+      ? JSON.parse(projectsJSON)
+      : [
+          {
+            id: uuidv4(),
+            name: 'Personal',
+            todos: [],
+          },
+        ];
   } catch (e) {
     return [];
   }
@@ -19,20 +28,21 @@ const saveProjects = () => {
 
 // Create a new project
 const createProject = name => {
-  const id = uuidv4();
-  const todos = [];
+  const duplicateProject = projects.find(project => project.name === name);
 
-  const projectProps = { id, name, todos };
+  if (!duplicateProject) {
+    const id = uuidv4();
+    const todos = [];
 
-  projects.push(projectProps);
-  saveProjects();
-  return projectProps;
+    const projectProps = { id, name, todos };
+    projects.push(projectProps);
+    saveProjects();
+  } else {
+    warningMsg();
+  }
 };
 
 const getProjects = () => projects;
-
-// const defaultProject = createProject('Personal');
-// const defaultProject2 = createProject('Work');
 
 projects = loadProjects();
 

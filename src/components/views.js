@@ -17,12 +17,14 @@ const renderProjectSidebar = () => {
     const projectBtn = document.createElement('button');
     projectBtn.setAttribute('data-attribute', `${project.id}`);
     projectBtn.setAttribute('id', 'projectButton');
-    projectBtn.setAttribute('class', 'project-button');
+    projectBtn.setAttribute('class', 'project-button btn');
     // Add an anchor for each item
     projectBtn.innerHTML = project.name;
     projectsListItem.append(projectBtn);
     projectList.append(projectsListItem);
   });
+
+  loadProjects();
   renderProjectHeader();
   return renderList;
 };
@@ -138,6 +140,14 @@ const initEditTodo = todoId => {
   handleEditTodo();
 };
 
+const warningMsg = () => {
+  const warningMsg = document.querySelector('#warningMsg');
+  warningMsg.textContent = 'That project already exists.';
+  setTimeout(() => {
+    warningMsg.textContent = '';
+  }, 2500);
+};
+
 export {
   renderProjectSidebar,
   renderProjectHeader,
@@ -145,4 +155,5 @@ export {
   loadDefaultProject,
   filterDefault,
   initEditTodo,
+  warningMsg,
 };

@@ -65,13 +65,14 @@ li {
   list-style-type: none;
 }
 
-.project-button {
+.home-button, .project-button {
   background-color: #fff;
   margin-left: 1em;
   border: none;
   cursor: pointer;
 }
 
+.home-button:hover,
 .project-button:hover {
   opacity: 0.7;
   background-color: var(--bluehover);

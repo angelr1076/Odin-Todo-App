@@ -16,8 +16,7 @@ const btnCloseModal = document.querySelector('.close-modal');
 const submitProjectForm = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
-    const name =
-      document.querySelector('#name').value || 'Auto Generated Project';
+    const name = document.querySelector('#name').value || 'Work';
 
     createProject(name);
     saveProjects();

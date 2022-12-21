@@ -27,6 +27,12 @@
         <div id="sidebarContainer" class="sidebar-container lower-container__left">
           <div class="home">
             <h3>Home</h3>
+            <ul id="homeList" class="home-list">
+              <li><button class="home-button btn">All</button></li>
+              <li><button class="home-button btn">Today</button></li>
+              <li><button class="home-button btn">Week</button></li>
+              <li><button class="home-button btn">Important</button></li>
+            </ul>
           </div>
           <div class="Projects">
             <h3>Projects</h3>
@@ -46,6 +52,7 @@
         <div id="todosContainer" class="todos-container lower-container__right">
           <!-- Project name -->
           <!-- Hidden project ID as data-attribute -->
+          <h2 id="warningMsg" class="warning-message"></h2>   
           <h2 id="projectHeader" class="project-header"></h2>   
           <!-- Edit todos modal -->
           <section class="edit-modal hidden">
