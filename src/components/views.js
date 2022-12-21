@@ -67,7 +67,6 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
     btn.addEventListener('click', () => {
       // Clear the todos list each time the button is pressed
       list.innerHTML = '';
-      // Search for the projectId in the projectArray
       filterProject(btnId, projectId, header);
     });
   });

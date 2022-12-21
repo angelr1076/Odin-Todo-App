@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
 
 :root {
-  --mont: "Montserrat", sans-serif;
+  --mukta: 'Mukta', sans-serif;
   --navbuttons: linear-gradient(180deg, #6fb4fd 0%, #5caafc 100%);
+  --vanilla: #f3e5ab;
   --brickblue: #b2c9d8;
   --bluehover: #ccdfeb;
   --brickred: #cb4154;
+  --lightgray: rgba(238, 232, 232, 0.4);
   --charcoal: rgba(50, 48, 48, 0.304);
   --salmon: rgba(250, 128, 114, 1);
   --salmonlgt: rgba(250, 128, 114, 0.6);
@@ -19,12 +21,15 @@
   padding: 0;
 }
 
-body {
-  font-family: var(--mont);
-}
+/* body {
+} */
 
 li {
   list-style-type: none;
+}
+
+html {
+  font-family: var(--mukta);
 }
 
 .content {
@@ -54,11 +59,11 @@ li {
 
 /* Sidebar */
 .sidebar-container {
-  background: #fff;
+  background-color: var(--lightgray);
   padding: 1em;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  /* flex: 1; */
 }
 
 .project-listitem {
@@ -66,16 +71,30 @@ li {
 }
 
 .home-button, .project-button {
-  background-color: #fff;
-  margin-left: 1em;
+  display: flex;
+  align-items: start;
+  color: var(--brickred);
+  background-color: var(--vanilla);
+  margin: 0.5em;
   border: none;
   cursor: pointer;
+  width: calc(100% - 10px);
+  padding: 0.75em;
+  font-size: 1rem;
+  border-radius: 5px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.active {
+  border: 1px solid var(--bluehover);
+  opacity: 1;
 }
 
 .home-button:hover,
 .project-button:hover {
-  opacity: 0.7;
-  background-color: var(--bluehover);
+  /* border: 1px solid var(--bluehover); */
+  opacity: 1;
 }
 
 /* Todos */
