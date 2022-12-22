@@ -38,7 +38,7 @@ const createProject = name => {
     projects.push(projectProps);
     saveProjects();
   } else {
-    warningMsg();
+    warningMsg(name);
   }
 };
 

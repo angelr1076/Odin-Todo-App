@@ -1,5 +1,6 @@
-import { handleDeleteTodo, handleShowEdit, handleEditTodo } from './handlers';
-import { truncateString, findTodo } from './helpers';
+import { handleDeleteTodo, handleShowEdit } from './handlers';
+import { truncateString, findTodo, checkProjectTodos } from './helpers';
+// import { toggleActive } from './showHideElements';
 import { updateTodo } from './todos';
 import { createProject, getProjects, loadProjects } from './projects';
 
@@ -13,14 +14,13 @@ const renderProjectSidebar = () => {
 
   const renderList = projects.forEach(project => {
     const projectsListItem = document.createElement('li');
-    projectsListItem.setAttribute('class', 'project-listitem');
-    const projectBtn = document.createElement('button');
-    projectBtn.setAttribute('data-attribute', `${project.id}`);
-    projectBtn.setAttribute('id', 'projectButton');
-    projectBtn.setAttribute('class', 'project-button btn');
+    const projectsAnchor = document.createElement('a');
+    projectsAnchor.setAttribute('id', 'projectButton');
+    projectsAnchor.setAttribute('class', 'home-button btn');
+    projectsAnchor.setAttribute('data-attribute', `${project.id}`);
     // Add an anchor for each item
-    projectBtn.innerHTML = project.name;
-    projectsListItem.append(projectBtn);
+    projectsAnchor.innerHTML = project.name;
+    projectsListItem.append(projectsAnchor);
     projectList.append(projectsListItem);
   });
 
@@ -52,7 +52,7 @@ const filterDefault = projectName => {
 
 // Render project header and initialize project buttons
 const renderProjectHeader = () => {
-  const projectBtn = document.querySelectorAll('button.project-button');
+  const projectBtn = document.querySelectorAll('a#projectButton');
   const todosList = document.querySelector('#todosList');
   const projectIdField = document.querySelector('#projectId');
 
@@ -67,6 +67,7 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
     btn.addEventListener('click', () => {
       // Clear the todos list each time the button is pressed
       list.innerHTML = '';
+
       filterProject(btnId, projectId, header);
     });
   });
@@ -74,6 +75,8 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
 
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
+  const message = document.querySelector('#message');
+  message.textContent = '';
   projects.filter(project => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
@@ -82,6 +85,7 @@ const filterProject = (projectBtn, projectId, header) => {
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
+      // checkProjectTodos(todos, project);
       renderTodos(todos, todosList);
     }
   });
@@ -135,13 +139,11 @@ const initEditTodo = todoId => {
   descField.value = findTodo(projects, todoId).description;
   dateField.value = findTodo(projects, todoId).dueDate;
   todoIdField.value = todoId;
-
-  handleEditTodo();
 };
 
-const warningMsg = () => {
-  const warningMsg = document.querySelector('#warningMsg');
-  warningMsg.textContent = 'That project already exists.';
+const warningMsg = projectName => {
+  const warningMsg = document.querySelector('#message');
+  warningMsg.textContent = `The project name '${projectName}'  already exists.`;
   setTimeout(() => {
     warningMsg.textContent = '';
   }, 2500);

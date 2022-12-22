@@ -8,16 +8,47 @@ const hideElement = element => {
   element.classList.add('hidden');
 };
 
-const toggleModal = () => {
-  const modalElement = document.querySelector('.edit-modal');
-  modalElement.classList.toggle('hidden');
-  modalElement.classList.toggle('open');
+const toggleAddModal = () => {
+  const modalElement = document.querySelector('.add-modal');
+  if (modalElement.classList.contains('open')) {
+    modalElement.classList.remove('open');
+    modalElement.classList.add('hidden');
+  } else {
+    modalElement.classList.remove('hidden');
+    modalElement.classList.add('open');
+  }
 };
 
-const closeModal = () => {
+const toggleEditModal = () => {
   const modalElement = document.querySelector('.edit-modal');
-  modalElement.classList.remove('open');
-  modalElement.classList.add('hidden');
+  if (modalElement.classList.contains('open')) {
+    modalElement.classList.remove('open');
+    modalElement.classList.add('hidden');
+  } else {
+    modalElement.classList.remove('hidden');
+    modalElement.classList.add('open');
+  }
 };
 
-export { showElement, hideElement, toggleModal, closeModal };
+// const closeModal = () => {
+//   const modalElement = document.querySelector('.add-modal');
+//   modalElement.classList.remove('open');
+//   modalElement.classList.add('hidden');
+// };
+
+// Toggle sidebar list item styling for active/inactive
+const toggleActive = e => {
+  var elems = document.querySelectorAll('.active');
+  [].forEach.call(elems, function (el) {
+    el.classList.remove('active');
+  });
+  e.target.className = 'active';
+};
+
+export {
+  showElement,
+  hideElement,
+  toggleAddModal,
+  toggleEditModal,
+  toggleActive,
+};

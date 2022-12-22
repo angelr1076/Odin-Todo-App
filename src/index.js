@@ -1,9 +1,9 @@
 import { renderProjectSidebar, loadDefaultProject } from './components/views';
 import {
-  // handleProjectView,
   handleSubmitProject,
   handleSubmitTodo,
-  showTodoForm,
+  handleShowAdd,
+  handleEditTodo,
 } from './components/handlers';
 import './styles/style.css';
 
@@ -19,10 +19,11 @@ const component = () => {
 window.addEventListener('load', () => {
   document.body.appendChild(component());
   // Show list of Projects in sidebar
+  handleShowAdd();
+  handleEditTodo();
   renderProjectSidebar();
   loadDefaultProject();
-  showTodoForm();
   handleSubmitProject();
   handleSubmitTodo();
-  // localStorage.clear();
+  // localStorage.clear(); // Clear everything
 });

@@ -1,16 +1,17 @@
 import { createTodo, updateTodo, removeTodo } from './todos';
 import { createProject, saveProjects } from './projects';
-import { renderProjectSidebar, initEditTodo, renderTodos } from './views';
+import { renderProjectSidebar, initEditTodo } from './views';
+import { checkProjectTodos } from './helpers';
 import {
-  hideElement,
-  showElement,
-  toggleModal,
-  closeModal,
+  toggleAddModal,
+  toggleEditModal,
+  toggleActive,
 } from './showHideElements';
 
-const todoForm = document.querySelector('#addTodoForm');
-const btnOpenModal = document.querySelector('.open-modal');
-const btnCloseModal = document.querySelector('.close-modal');
+const closeAddModal = document.querySelector('#todoCancelBtn');
+const closeEditModal = document.querySelector('#closeModal');
+const listEl = document.querySelector('#projectList');
+const homeEl = document.querySelector('#homeList');
 
 // Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
@@ -44,23 +45,23 @@ const submitTodoForm = element => {
       dueDate,
     });
     saveProjects();
-
-    hideElement(todoForm);
+    toggleAddModal();
   });
 };
 
-// Show and hide the add todo form and toggle the show/hide when the + todo button is clicked
-const showTodoForm = () => {
-  const todoBtn = document.querySelector('#addTodo');
-  const cancelBtn = document.querySelector('#todoCancelBtn');
-  todoBtn.addEventListener(
-    'click',
-    () =>
-      (todoForm.style.visibility = 'visible' ? showElement(todoForm) : null),
-  );
-  cancelBtn.addEventListener('click', e => {
-    e.preventDefault();
-    hideElement(todoForm);
+// Show the add todo modal
+const showTodoForm = element => {
+  element.addEventListener('click', () => {
+    toggleAddModal();
+  });
+};
+
+// Show the edit todo modal
+const showEditTodoForm = (element, todo) => {
+  element.addEventListener('click', e => {
+    // e.preventDefault();
+    initEditTodo(todo.id);
+    toggleEditModal();
   });
 };
 
@@ -73,17 +74,6 @@ const submitTodoDelete = element => {
   });
 };
 
-btnOpenModal.addEventListener('click', toggleModal);
-btnCloseModal.addEventListener('click', toggleModal);
-
-const showEditTodoForm = (element, todo) => {
-  element.addEventListener('click', e => {
-    e.preventDefault();
-    initEditTodo(todo.id);
-    toggleModal();
-  });
-};
-
 const submitTodoEdit = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
@@ -93,7 +83,7 @@ const submitTodoEdit = element => {
     const dateField = document.querySelector('#editDate').value;
     const todoId = document.querySelector('#todoId').value;
 
-    const todo = updateTodo(todoId, {
+    updateTodo(todoId, {
       title: titleField,
       description: descField,
       dueDate: dateField,
@@ -101,11 +91,14 @@ const submitTodoEdit = element => {
 
     saveProjects();
     // Close modal
-    closeModal();
-
-    return todo;
+    toggleEditModal();
   });
 };
+
+closeAddModal.addEventListener('click', toggleAddModal);
+closeEditModal.addEventListener('click', toggleEditModal);
+listEl.addEventListener('click', toggleActive);
+homeEl.addEventListener('click', toggleActive);
 
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');
@@ -120,6 +113,11 @@ const handleSubmitTodo = () => {
 const handleDeleteTodo = todo => {
   const removeTodoBtn = document.querySelector(`#todoDelete-${todo.id}`);
   return submitTodoDelete(removeTodoBtn);
+};
+
+const handleShowAdd = () => {
+  const addOpenModalBtn = document.querySelector('.open-add-modal');
+  return showTodoForm(addOpenModalBtn);
 };
 
 const handleShowEdit = todo => {
@@ -138,6 +136,7 @@ export {
   handleSubmitProject,
   handleSubmitTodo,
   handleDeleteTodo,
+  handleShowAdd,
   handleShowEdit,
   showTodoForm,
   handleEditTodo,

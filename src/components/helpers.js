@@ -22,4 +22,11 @@ const findTodo = (projects, todoId) => {
   return todoToEdit;
 };
 
-export { truncateString, setAttributes, findTodo };
+const checkProjectTodos = (element, project) => {
+  if (element.length === 0) {
+    message.textContent = `There are no todos for '${project.name}'`;
+    projectHeader.textContent = '';
+  }
+};
+
+export { truncateString, setAttributes, findTodo, checkProjectTodos };
