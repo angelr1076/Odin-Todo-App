@@ -34,25 +34,29 @@
               <li><a href="#" class="home-button btn">Important</a></li>
             </ul>
           </div>
+          <!-- End home container -->
           <div class="Projects">
             <h3 class="header">Projects</h3>
             <ul id="projectList" class="project-list">
               <!-- Projects list -->
             </ul>
             <!-- Add project button -->
+            <div class="addProject">
+              <button type="button" class="btn show-project-cont">+ Project</button>
+            </div>
             <!-- Project form collapsible -->
-            <hr>
-            <div class="project-form-container">
+            <div class="project-form-container hidden">
               <form action="" id="projectForm" class="project-form" name="projectForm">
-                <label for="name" class="label">+ Project</label>
+                <label for="name" class="label">New Project</label>
                 <input type="text" id="name" class="name">
                 <div class="button-container">
-                  <button type="button" id="projectSubmitBtn" class="btn create-project">Edit Todo</button>
+                  <button type="button" id="projectSubmitBtn" class="btn create-project">Create</button>
                   <button type="button" id="closeModal" class="btn close-modal cancel">Cancel</button>
                 </div>
               </form>
             </div>
           </div>
+          <!-- End projects container -->
         </div>
         <div id="todosContainer" class="todos-container lower-container__right">
           <!-- Project name -->
@@ -81,7 +85,7 @@
                 </div>
                 <div class="button-container">
                   <button type="button" id="editTodoSubmitBtn" class="btn edit-todo">Edit Todo</button>
-                  <button type="button" id="closeModal" class="btn close-modal cancel">Cancel</button>
+                  <button type="button" id="closeModal" class="btn cancel-edit">Cancel</button>
                 </div>
               </form>
             </div>

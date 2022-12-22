@@ -30,11 +30,16 @@ const toggleEditModal = () => {
   }
 };
 
-// const closeModal = () => {
-//   const modalElement = document.querySelector('.add-modal');
-//   modalElement.classList.remove('open');
-//   modalElement.classList.add('hidden');
-// };
+const expandProjectCont = () => {
+  const projectFormCont = document.querySelector('.project-form-container');
+  if (projectFormCont.classList.contains('open')) {
+    projectFormCont.classList.remove('open');
+    projectFormCont.classList.add('hidden');
+  } else {
+    projectFormCont.classList.remove('hidden');
+    projectFormCont.classList.add('open');
+  }
+};
 
 // Toggle sidebar list item styling for active/inactive
 const toggleActive = e => {
@@ -50,5 +55,6 @@ export {
   hideElement,
   toggleAddModal,
   toggleEditModal,
+  expandProjectCont,
   toggleActive,
 };

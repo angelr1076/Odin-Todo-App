@@ -74,7 +74,7 @@ button {
   padding: 1em;
   display: flex;
   flex-direction: column;
-  /* flex: 1; */
+  flex: 1;
 }
 
 .header {
@@ -108,13 +108,17 @@ a:hover {
   border: 1px solid var(--brickred);
 }
 
+.project-form-container {
+  /* display: none; */
+}
+
 /* Todos */
 .todos-container {
   background: #ccdfeb;
   padding: 1em;
   display: flex;
   flex-direction: column;
-  flex: 6;
+  flex: 4;
 }
 
 .todo-container {
@@ -147,18 +151,6 @@ a:hover {
   background-color: #fff;
   background: rgba(0, 0, 0, 0.7);
 }
-
-/* .open-modal {
-  background: #fff;
-  border-radius: 5px;
-  border: 1px solid var(--dimBlack);
-  transition: all 0.2s linear;
-  text-transform: uppercase;
-}
-
-.open-modal:hover {
-  background: rgba(241, 238, 238, 0.8);
-} */
 
 .edit-modal.open, .add-modal.open {
   display: flex;

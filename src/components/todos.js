@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getProjects, saveProjects } from './projects';
-import { findTodo } from './helpers';
+import { findTodo, checkProjectTodos } from './helpers';
 import { filterDefault, renderTodos } from './views';
 
 const projects = getProjects();
@@ -32,6 +32,7 @@ const removeTodo = id => {
 
   projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
   saveProjects();
+  checkProjectTodos(projectOnPage.todos, projectOnPage);
   renderTodos(projectOnPage.todos, todosList);
 };
 

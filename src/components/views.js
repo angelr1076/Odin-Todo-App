@@ -85,7 +85,7 @@ const filterProject = (projectBtn, projectId, header) => {
       // Pass the project ID to the projectId
       projectId.value = project.id;
       const todos = project.todos;
-      // checkProjectTodos(todos, project);
+      checkProjectTodos(todos, project);
       renderTodos(todos, todosList);
     }
   });
@@ -143,7 +143,7 @@ const initEditTodo = todoId => {
 
 const warningMsg = projectName => {
   const warningMsg = document.querySelector('#message');
-  warningMsg.textContent = `The project name '${projectName}'  already exists.`;
+  warningMsg.textContent = `The project name '${projectName}' already exists.`;
   setTimeout(() => {
     warningMsg.textContent = '';
   }, 2500);
