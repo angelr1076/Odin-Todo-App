@@ -3,13 +3,14 @@ import { createProject, saveProjects } from './projects';
 import { renderProjectSidebar, initEditTodo } from './views';
 import { checkProjectTodos, hideMessage } from './helpers';
 import {
-  expandProjectCont,
+  toggleAddProj,
   toggleAddModal,
   toggleEditModal,
   toggleActive,
 } from './showHideElements';
 
 const projectContBtn = document.querySelector('.show-project-cont');
+const closeProjModal = document.querySelector('.cancel-project');
 const closeAddModal = document.querySelector('#todoCancelBtn');
 const closeEditModal = document.querySelector('.cancel-edit');
 const listEl = document.querySelector('#projectList');
@@ -23,6 +24,7 @@ const submitProjectForm = element => {
 
     createProject(name);
     saveProjects();
+    toggleAddProj();
     renderProjectSidebar();
   });
   return;
@@ -97,7 +99,8 @@ const submitTodoEdit = element => {
   });
 };
 
-projectContBtn.addEventListener('click', expandProjectCont);
+projectContBtn.addEventListener('click', toggleAddProj);
+closeProjModal.addEventListener('click', toggleAddProj);
 closeAddModal.addEventListener('click', toggleAddModal);
 closeEditModal.addEventListener('click', toggleEditModal);
 listEl.addEventListener('click', toggleActive);

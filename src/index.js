@@ -6,6 +6,7 @@ import {
   handleEditTodo,
 } from './components/handlers';
 import './styles/style.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const component = () => {
   const mainContainer = document.createElement('div');
@@ -25,5 +26,6 @@ window.addEventListener('load', () => {
   loadDefaultProject();
   handleSubmitProject();
   handleSubmitTodo();
-  // localStorage.clear(); // Clear everything
+  // Clear everything
+  // localStorage.clear();
 });

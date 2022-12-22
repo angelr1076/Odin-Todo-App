@@ -30,7 +30,7 @@ const toggleEditModal = () => {
   }
 };
 
-const expandProjectCont = () => {
+const toggleAddProj = () => {
   const projectFormCont = document.querySelector('.project-form-container');
   if (projectFormCont.classList.contains('open')) {
     projectFormCont.classList.remove('open');
@@ -55,6 +55,6 @@ export {
   hideElement,
   toggleAddModal,
   toggleEditModal,
-  expandProjectCont,
+  toggleAddProj,
   toggleActive,
 };
