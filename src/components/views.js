@@ -94,19 +94,14 @@ const filterProject = (projectBtn, projectId, header) => {
 const todoEl = todo => {
   const todoHTML = `
     <div id="todoContainer" class="todo-container">
+      <div class="todo-container__left>
         <h3 class="todo-title">${todo.title}</h3>
-        <p class="todo-description" title="${
-          todo.description
-        }">Description: ${truncateString(todo.description)}</p>
-        <p class-"todo-duedate">Due: ${todo.dueDate}</p>
-        <button id="todoEdit-${
-          todo.id
-        }" class="btn todo-edit" data-attribute="${todo.id}">Edit</button>
-                    <button id="todoDelete-${
-                      todo.id
-                    }" class="btn todo-delete" data-attribute="${
-    todo.id
-  }">Delete</button>
+      </div>
+      <div class="todo-container__right>  
+      <p class-"todo-duedate">Due: ${todo.dueDate}</p>
+      <button id="todoEdit-${todo.id}" class="btn todo-edit" data-attribute="${todo.id}">Edit</button>
+                  <button id="todoDelete-${todo.id}" class="btn todo-delete" data-attribute="${todo.id}">Delete</button>
+      </div>
     </div>
               `;
   return todoHTML;
@@ -117,12 +112,13 @@ const renderTodos = (todosArray, todosEl) => {
   todosEl.innerHTML = '';
 
   todosArray.forEach(todo => {
-    let li = document.createElement('li');
+    const mainDiv = document.createElement('div');
     // Render the project list in the project ul querySelector
-    todosEl.appendChild(li);
-    li.setAttribute('id', `todoItem-${todo.id}`);
-    li.setAttribute('class', 'todo-item');
-    li.innerHTML = todoEl(todo);
+    todosEl.appendChild(mainDiv);
+
+    mainDiv.setAttribute('id', `todoItem-${todo.id}`);
+    mainDiv.setAttribute('class', 'todo-item');
+    mainDiv.innerHTML = todoEl(todo);
 
     handleDeleteTodo(todo);
     handleShowEdit(todo);

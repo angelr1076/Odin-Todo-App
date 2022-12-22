@@ -5,11 +5,12 @@
   --navbuttons: linear-gradient(180deg, #6fb4fd 0%, #5caafc 100%);
   --white: #fff;
   --black: #000;
+  --black-faded: #233142;
   --vanilla: #f3e5ab;
   --brickblue: #b2c9d8;
   --bluehover: #ccdfeb;
-  --brickred: #cb4154;
-  --lightgray: rgba(238, 232, 232, 0.4);
+  --brickred: #f95959;
+  --lightgray: #e3e3e3;
   --charcoal: rgba(50, 48, 48, 0.304);
   --salmon: rgba(250, 128, 114, 1);
   --salmonlgt: rgba(250, 128, 114, 0.6);
@@ -22,9 +23,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* body {
-} */
 
 li {
   list-style-type: none;
