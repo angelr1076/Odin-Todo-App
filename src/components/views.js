@@ -97,13 +97,12 @@ const todoEl = todo => {
       <div class="todo-container__left>
         <h3 class="todo-title">${todo.title}</h3>
       </div>
-      <div class="todo-container__right>  
-      <p class-"todo-duedate">Due: ${todo.dueDate}</p>
-      <button id="todoEdit-${todo.id}" class="btn todo-edit" data-attribute="${todo.id}">Edit</button>
-                  <button id="todoDelete-${todo.id}" class="btn todo-delete" data-attribute="${todo.id}">Delete</button>
+      <div class="todo-container__right">  
+        <span class="todo-duedate">${todo.dueDate}</span>
+        <i id="todoEdit-${todo.id}" class="bi bi-pencil-square todo-edit" data-attribute="${todo.id}"></i>
+        <i id="todoDelete-${todo.id}" class="bi bi-trash todo-delete" data-attribute="${todo.id}"></i>
       </div>
-    </div>
-              `;
+    </div>`;
   return todoHTML;
 };
 

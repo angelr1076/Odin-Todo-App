@@ -3,15 +3,17 @@
 :root {
   --mukta: 'Mukta', sans-serif;
   --navbuttons: linear-gradient(180deg, #6fb4fd 0%, #5caafc 100%);
+  /* Primary color palette */
   --white: #fff;
   --black: #000;
   --black-faded: #233142;
+  --charcoal: #455d7a;
+  --coral: #f95959;
+  --lightgray: #e3e3e3;
+  /* Secondary palette */
   --vanilla: #f3e5ab;
   --brickblue: #b2c9d8;
   --bluehover: #ccdfeb;
-  --brickred: #f95959;
-  --lightgray: #e3e3e3;
-  --charcoal: rgba(50, 48, 48, 0.304);
   --salmon: rgba(250, 128, 114, 1);
   --salmonlgt: rgba(250, 128, 114, 0.6);
 }
@@ -68,7 +70,7 @@ button {
 
 /* Sidebar */
 .sidebar-container {
-  background-color: var(--lightgray);
+  background-color: var(--black-faded);
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -78,6 +80,7 @@ button {
 .header {
   display: flex;
   justify-content: center;
+  color: var(--white);
 }
 
 a {
@@ -131,7 +134,7 @@ a:hover {
 
 /* Todos */
 .todos-container {
-  background: #ccdfeb;
+  background: var(--white);
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -142,11 +145,36 @@ a:hover {
   display: flex;
   padding: 1em;
   margin: 1em;
-  gap: 1.5em;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: #fff;
+  /* color: var(--white); */
+  box-shadow: 3px 3px 2px -2px var(--lightgray);;
+  justify-content: space-between;
+  border: 1px solid var(--black-faded);
+  border-radius: 5px;
 }
+
+.todo-container__left {
+  display: flex;
+  /* flex: 3; */
+}
+
+.todo-container__right {
+  display: flex;
+  flex-direction: row-reverse;
+  /* flex: 3; */
+}
+
+.todo-duedate, .bi {
+  margin-left: 0.5em;
+}
+
+.bi:hover {
+  cursor: pointer;
+}
+
+.todo-container:hover {
+  opacity: 0.5;
+}
+
 
 .addtodo-container {
   display: flex;
