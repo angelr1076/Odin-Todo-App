@@ -24,7 +24,7 @@ const findTodo = (projects, todoId) => {
 
 const checkProjectTodos = (arr, project) => {
   if (arr.length === 0) {
-    message.textContent = `There are no todos for '${project.name}'`;
+    message.textContent = `There are no todos for ${project.name}`;
     projectHeader.textContent = '';
   }
 };

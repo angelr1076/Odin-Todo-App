@@ -7,6 +7,8 @@ import {
   toggleAddModal,
   toggleEditModal,
   toggleActive,
+  showElement,
+  hideElement,
 } from './showHideElements';
 
 const projectContBtn = document.querySelector('.show-project-cont');
@@ -15,17 +17,29 @@ const closeAddModal = document.querySelector('#todoCancelBtn');
 const closeEditModal = document.querySelector('.cancel-edit');
 const listEl = document.querySelector('#projectList');
 const homeEl = document.querySelector('#homeList');
+const deleteBtn = document.querySelector('#deleteAll');
 
 // Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
-    const name = document.querySelector('#name').value || 'Work';
+    const name = document.querySelector('#name').value;
+    const form = document.querySelector('#projectForm');
+    let projectTitle = document.querySelector('#projWarningMsg');
+
+    if (!name) {
+      showElement(projectTitle);
+      projectTitle.textContent = 'Please add a Project name.';
+      return setTimeout(() => {
+        hideElement(projectTitle);
+      }, 2000);
+    }
 
     createProject(name);
     saveProjects();
     toggleAddProj();
     renderProjectSidebar();
+    form.reset();
   });
   return;
 };
@@ -34,13 +48,23 @@ const submitProjectForm = element => {
 const submitTodoForm = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
-    const projectId = document.querySelector('#projectId').value;
-    const title =
-      document.querySelector('#title').value || 'Cupcake ipsum dolor ';
-    const description =
-      document.querySelector('#description').value ||
-      'Macaroon gummi bears cake pie cheesecake oat cake. Cheesecake sweet roll topping jelly-o muffin I love.';
-    const dueDate = document.querySelector('#dueDate').value || '2030-01-01';
+    let projectId = document.querySelector('#projectId').value;
+    let title = document.querySelector('#title').value;
+    let description = document.querySelector('#description').value;
+    let dueDate = document.querySelector('#dueDate').value;
+    const titleEl = document.querySelector('#title');
+    const descEl = document.querySelector('#description');
+    const dateEl = document.querySelector('#dueDate');
+    let formTitle = document.querySelector('#todoAddMsg');
+
+    if (!title || !description || !dueDate) {
+      console.log('not todo');
+      showElement(formTitle);
+      formTitle.textContent = 'Please add a title, desc. and date.';
+      return setTimeout(() => {
+        hideElement(formTitle);
+      }, 2000);
+    }
 
     createTodo({
       projectId,
@@ -48,10 +72,16 @@ const submitTodoForm = element => {
       description,
       dueDate,
     });
+
     saveProjects();
     hideMessage();
     toggleAddModal();
+    // Clear form fields
+    titleEl.value = '';
+    descEl.value = '';
+    dateEl.value = '';
   });
+  return;
 };
 
 // Show the add todo modal
@@ -99,12 +129,19 @@ const submitTodoEdit = element => {
   });
 };
 
+const deleteAll = () => {
+  // Clear everything
+  localStorage.clear();
+  location.reload();
+};
+
 projectContBtn.addEventListener('click', toggleAddProj);
 closeProjModal.addEventListener('click', toggleAddProj);
 closeAddModal.addEventListener('click', toggleAddModal);
 closeEditModal.addEventListener('click', toggleEditModal);
 listEl.addEventListener('click', toggleActive);
 homeEl.addEventListener('click', toggleActive);
+deleteBtn.addEventListener('click', deleteAll);
 
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');

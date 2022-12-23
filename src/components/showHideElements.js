@@ -1,6 +1,6 @@
 const showElement = element => {
-  element.classList.toggle('hidden');
-  element.classList.toggle('show');
+  element.classList.remove('hidden');
+  element.classList.add('show');
 };
 
 const hideElement = element => {
@@ -31,6 +31,7 @@ const toggleEditModal = () => {
 };
 
 const toggleAddProj = () => {
+  // projectTitle.innerHTML = '';
   const projectFormCont = document.querySelector('.project-form-container');
   if (projectFormCont.classList.contains('open')) {
     projectFormCont.classList.remove('open');

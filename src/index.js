@@ -26,6 +26,4 @@ window.addEventListener('load', () => {
   loadDefaultProject();
   handleSubmitProject();
   handleSubmitTodo();
-  // Clear everything
-  // localStorage.clear();
 });
