@@ -75,7 +75,7 @@ button {
   align-items: center;
   justify-content: space-between;
   height: 5vh;
-  padding: 2em;
+  padding: 1em;
   color: var(--white);
 }
 
@@ -90,7 +90,7 @@ button {
 /* Sidebar */
 .lower-container {
   display: flex;
-  height: 100vh;
+  height: 95vh;
 }
 
 .sidebar-visible {
