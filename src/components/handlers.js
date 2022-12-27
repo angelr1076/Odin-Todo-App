@@ -8,13 +8,14 @@ import {
   toggleEditModal,
   toggleActive,
   showElement,
-  hideElement,
 } from './showHideElements';
 
 const projectContBtn = document.querySelector('.show-project-cont');
 const closeProjModal = document.querySelector('.cancel-project');
 const closeAddModal = document.querySelector('#todoCancelBtn');
 const closeEditModal = document.querySelector('.cancel-edit');
+const openSidebar = document.querySelector('#openSidebar');
+const closeSidebar = document.querySelector('#closeSidebar');
 const listEl = document.querySelector('#projectList');
 const homeEl = document.querySelector('#homeList');
 const deleteBtn = document.querySelector('#deleteAll');
@@ -135,6 +136,11 @@ const deleteAll = () => {
   location.reload();
 };
 
+const toggleSidebar = () => {
+  const hiddenSidebar = document.querySelector('.sidebar-container');
+  hiddenSidebar.classList.toggle('hidden');
+};
+
 projectContBtn.addEventListener('click', toggleAddProj);
 closeProjModal.addEventListener('click', toggleAddProj);
 closeAddModal.addEventListener('click', toggleAddModal);
@@ -142,6 +148,8 @@ closeEditModal.addEventListener('click', toggleEditModal);
 listEl.addEventListener('click', toggleActive);
 homeEl.addEventListener('click', toggleActive);
 deleteBtn.addEventListener('click', deleteAll);
+openSidebar.addEventListener('click', toggleSidebar);
+closeSidebar.addEventListener('click', toggleSidebar);
 
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');

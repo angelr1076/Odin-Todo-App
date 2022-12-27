@@ -46,7 +46,8 @@ button {
   cursor: pointer;
 }
 
-.add, .edit {
+.add,
+.edit {
   border: 2px solid var(--charcoal);
 }
 
@@ -54,7 +55,8 @@ button {
   border: 2px solid var(--salmon);
 }
 
-.add:hover, .edit:hover {
+.add:hover,
+.edit:hover {
   opacity: 0.7;
   color: var(--white);
   background-color: var(--charcoal);
@@ -72,27 +74,35 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 7vh;
-  padding: 1em;
+  height: 5vh;
+  padding: 2em;
+  color: var(--white);
 }
 
-.brand > h3 {
-  color: #fff;
+.brand>h3 {
+  color: var(--white);
 }
 
-/* Lower container */
-.lower-container {
-  display: flex;
-  height: 95vh;
+.bi-list::before {
+  font-size: 1.25em;
 }
 
 /* Sidebar */
-.sidebar-container {
+.lower-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar-visible {
   background-color: var(--black-faded);
   padding: 1em;
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.bi-x-circle::before {
+  color: var(--vanilla);
 }
 
 .header {
@@ -127,6 +137,10 @@ a:hover {
   border: 1px solid var(--coral);
 }
 
+.bi-plus-circle-dotted::before {
+  margin-right: 1em;
+}
+
 .show-project-cont {
   margin-left: 0.5em;
   cursor: pointer;
@@ -135,10 +149,12 @@ a:hover {
 /* Todos */
 .todos-message-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   color: var(--vanilla);
   font-size: 1.5rem;
+  padding: 0.25em;
+  margin-bottom: 1em;
 }
 
 .delete-all {
@@ -169,7 +185,6 @@ a:hover {
 
 .todos-container {
   background: var(--charcoal);
-  padding: 1em;
   display: flex;
   flex-direction: column;
   flex: 4;
@@ -180,11 +195,8 @@ a:hover {
   padding: 1em;
   margin: 1em;
   color: var(--white);
-  /* box-shadow: 1px 3px 5px 2px var(--black-faded); */
   justify-content: space-between;
-  /* border-left: 1px solid var(--white); */
   border-bottom: 1px solid var(--white);
-  /* border-radius: 5px; */
   z-index: 0;
 }
 
@@ -202,7 +214,9 @@ a:hover {
   z-index: 0;
 }
 
-.todo-duedate, .bi {
+
+.todo-duedate,
+.bi {
   margin-left: 0.5em;
 }
 
@@ -214,7 +228,9 @@ a:hover {
 }
 
 /* Modal */
-.edit-modal, .add-modal, .project-form-container {
+.edit-modal,
+.add-modal,
+.project-form-container {
   display: none;
   position: fixed;
   top: 0;
@@ -227,7 +243,9 @@ a:hover {
   background: rgba(0, 0, 0, 0.7);
 }
 
-.edit-modal.open, .add-modal.open, .project-form-container.open {
+.edit-modal.open,
+.add-modal.open,
+.project-form-container.open {
   display: flex;
 }
 
@@ -270,7 +288,8 @@ textarea.editor {
   text-transform: capitalize;
 }
 
-input[type="text"], input[type="number"] {
+input[type="text"],
+input[type="number"] {
   height: 3em;
   padding-left: .75em;
 }
@@ -292,7 +311,9 @@ input[type="date"] {
   border-radius: 5px;
 }
 
-.edit-modal.open .modal-container, .add-modal.open .modal-container, .project-form-container.open .modal-container {
+.edit-modal.open .modal-container,
+.add-modal.open .modal-container,
+.project-form-container.open .modal-container {
   animation: move 0.8s ease-in-out;
 }
 
@@ -337,4 +358,3 @@ input[type="date"] {
   display: inherit;
   visibility: visible;
 }
-
