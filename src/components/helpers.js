@@ -15,6 +15,7 @@ const setAttributes = (element, attributes) => {
   );
 };
 
+// Populates the todo modal title, desc and dueDate properties in edit mode
 const findTodo = (projects, todoId) => {
   const projectId = projectHeader.dataset.id;
   // find todo for the 'All' Home view
