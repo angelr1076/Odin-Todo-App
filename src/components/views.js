@@ -2,9 +2,12 @@ import { handleDeleteTodo, handleShowEdit } from './handlers';
 import { findTodo, checkProjectTodos, hideMessage } from './helpers';
 import { getProjects, loadProjects } from './projects';
 import { hideElement, showElement } from './showHideElements';
+import parseISO from 'date-fns/parseISO';
+import isToday from 'date-fns/isToday';
 
 const projectHeader = document.querySelector('#projectHeader');
 const allTodosBtn = document.querySelector('#allTodosBtn');
+const daysTodosBtn = document.querySelector('#daysTodosBtn');
 const addTodoButton = document.querySelector('#openAddModal');
 const projects = getProjects();
 
@@ -77,15 +80,14 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
 };
 
 const renderAll = (todos, todosEl) => {
+  let headerName = projectHeader.dataset.id;
   // Clear the todos list each time the button is pressed
   todosEl.innerHTML = '';
 
-  if (todos) {
+  if (headerName === 'all' && todos) {
     todos.forEach(todo => {
-      console.log({ todo });
       if (todo) {
         todo.forEach(item => {
-          console.log({ item });
           const mainDiv = document.createElement('div');
           // Render the project list in the project ul querySelector
           todosEl.appendChild(mainDiv);
@@ -105,9 +107,11 @@ const renderAll = (todos, todosEl) => {
   }
 };
 
+// Rebuild the filterAll function to handle All, Today and Week buttons
 const filterAll = () => {
   const todosList = document.querySelector('#todosList');
 
+  // separate header assignment into its own function based on the button name attribute
   let header = projectHeader;
   header.dataset.id = 'all';
   todosList.innerHTML = '';
@@ -117,16 +121,21 @@ const filterAll = () => {
 
   const todos = projects.map(project => {
     const todoList = project.todos;
+    console.log(todoList);
+    // Find a way to filter todoList by date to get today or week list
     if (todoList.length > 0) {
       return todoList;
     }
   });
+
   checkProjectTodos(todos, 'all');
   renderAll(todos, todosList);
 };
 
 // Click handler for the 'All' button
 allTodosBtn.addEventListener('click', filterAll);
+// Click handler for the 'Today' button
+daysTodosBtn.addEventListener('click', e => console.log(e.target));
 
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
@@ -161,6 +170,10 @@ const todoEl = todo => {
         <i id="todoDelete-${todo.id}" class="bi bi-trash todo-delete" name="deleteButton" data-attribute="${todo.id}"></i>
       </div>
     </div>`;
+  // TO REMOVE - JUST TESTING
+  if (isToday(parseISO(todo.dueDate))) {
+    console.log({ todo });
+  }
   return todoHTML;
 };
 
