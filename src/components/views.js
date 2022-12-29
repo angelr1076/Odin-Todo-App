@@ -82,8 +82,10 @@ const renderAll = (todos, todosEl) => {
 
   if (todos) {
     todos.forEach(todo => {
+      console.log({ todo });
       if (todo) {
         todo.forEach(item => {
+          console.log({ item });
           const mainDiv = document.createElement('div');
           // Render the project list in the project ul querySelector
           todosEl.appendChild(mainDiv);
