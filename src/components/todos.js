@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getProjects, saveProjects } from './projects';
 import { findTodo, checkProjectTodos } from './helpers';
-import { filterDefault, renderTodos } from './views';
+import { filterDefault, renderTodos, renderAll } from './views';
 
 const projects = getProjects();
+let allTodos = projects.map(project => project.todos);
 
 // Create a new todo
 const createTodo = todo => {
@@ -30,10 +31,12 @@ const removeTodo = id => {
   let projectId = projectHeader.dataset.id;
   let projectOnPage = projects.find(item => item.id === projectId);
 
-  projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
-  saveProjects();
-  checkProjectTodos(projectOnPage.todos, projectOnPage);
-  renderTodos(projectOnPage.todos, todosList);
+  if (projectOnPage) {
+    projectOnPage.todos = projectOnPage.todos.filter(todo => todo.id !== id);
+    saveProjects();
+    checkProjectTodos(projectOnPage.todos, projectOnPage);
+    renderTodos(projectOnPage.todos, todosList);
+  }
 };
 
 const updateTodo = (id, updates) => {
@@ -41,7 +44,7 @@ const updateTodo = (id, updates) => {
   let projectHeader = document.getElementById('projectHeader');
   const todosList = document.querySelector('#todosList');
   let projectId = projectHeader.dataset.id;
-  let projectOnPage = projects.find(item => item.id === projectId);
+  let projectOnPage = projects.find(project => project.id === projectId);
 
   if (typeof updates.title === 'string') {
     todo.title = updates.title;
@@ -55,7 +58,11 @@ const updateTodo = (id, updates) => {
 
   saveProjects();
 
-  renderTodos(projectOnPage.todos, todosList);
+  if (projectOnPage) {
+    renderTodos(projectOnPage.todos, todosList);
+  } else {
+    renderAll(allTodos, todosList);
+  }
 
   return todo;
 };

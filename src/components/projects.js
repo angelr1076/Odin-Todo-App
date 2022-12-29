@@ -24,6 +24,7 @@ const loadProjects = () => {
 // Save the project(s) to localStorage
 const saveProjects = () => {
   localStorage.setItem('projects', JSON.stringify(projects));
+  // console.log(localStorage.getItem('projects'));
 };
 
 // Create a new project

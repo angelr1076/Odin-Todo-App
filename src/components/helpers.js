@@ -17,14 +17,30 @@ const setAttributes = (element, attributes) => {
 
 const findTodo = (projects, todoId) => {
   const projectId = projectHeader.dataset.id;
-  let projectOnPage = projects.find(project => project.id === projectId);
-  const todoToEdit = projectOnPage.todos.find(todo => todo.id === todoId);
-  return todoToEdit;
+  // find todo for the 'All' Home view
+  if (projectId === 'all') {
+    let todoToEdit;
+    projects.forEach(project =>
+      project.todos.find(todo => {
+        if (todo.id === todoId) {
+          todoToEdit = todo;
+        }
+      }),
+    );
+    return todoToEdit;
+  } else {
+    let projectOnPage = projects.find(project => project.id === projectId);
+    const todoToEdit = projectOnPage.todos.find(todo => todo.id === todoId);
+    return todoToEdit;
+  }
 };
 
 const checkProjectTodos = (arr, project) => {
-  if (arr.length === 0) {
-    message.textContent = `There are no todos for ${project.name}`;
+  if (arr.length === 0 && project !== 'all') {
+    message.textContent = `There are no todos for ${project.name}.`;
+    projectHeader.textContent = '';
+  } else if ((arr.length === 0 && project === 'all') || arr[0] === undefined) {
+    message.textContent = `No todos found.`;
     projectHeader.textContent = '';
   }
 };

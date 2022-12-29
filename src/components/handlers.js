@@ -37,7 +37,7 @@ const submitProjectForm = element => {
     }
 
     createProject(name);
-    saveProjects();
+    // saveProjects();
     toggleAddProj();
     renderProjectSidebar();
     form.reset();
@@ -59,7 +59,6 @@ const submitTodoForm = element => {
     let formTitle = document.querySelector('#todoAddMsg');
 
     if (!title || !description || !dueDate) {
-      console.log('not todo');
       showElement(formTitle);
       formTitle.textContent = 'Please add a title, desc. and date.';
       return setTimeout(() => {
@@ -74,7 +73,6 @@ const submitTodoForm = element => {
       dueDate,
     });
 
-    saveProjects();
     hideMessage();
     toggleAddModal();
     // Clear form fields
@@ -105,7 +103,6 @@ const submitTodoDelete = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
     removeTodo(todoId);
-    saveProjects();
   });
 };
 
@@ -124,14 +121,13 @@ const submitTodoEdit = element => {
       dueDate: dateField,
     });
 
-    saveProjects();
     // Close modal
     toggleEditModal();
   });
 };
 
+// Delete all projects and todos
 const deleteAll = () => {
-  // Clear everything
   localStorage.clear();
   location.reload();
 };
@@ -161,14 +157,14 @@ const handleSubmitTodo = () => {
   return submitTodoForm(submitTodoBtn);
 };
 
-const handleDeleteTodo = todo => {
-  const removeTodoBtn = document.querySelector(`#todoDelete-${todo.id}`);
-  return submitTodoDelete(removeTodoBtn);
-};
-
 const handleShowAdd = () => {
   const addOpenModalBtn = document.querySelector('.open-add-modal');
   return showTodoForm(addOpenModalBtn);
+};
+
+const handleDeleteTodo = todo => {
+  const removeTodoBtn = document.querySelector(`#todoDelete-${todo.id}`);
+  return submitTodoDelete(removeTodoBtn);
 };
 
 const handleShowEdit = todo => {

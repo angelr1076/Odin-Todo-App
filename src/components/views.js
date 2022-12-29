@@ -1,10 +1,11 @@
 import { handleDeleteTodo, handleShowEdit } from './handlers';
-import { truncateString, findTodo, checkProjectTodos } from './helpers';
-// import { toggleActive } from './showHideElements';
-import { updateTodo } from './todos';
-import { createProject, getProjects, loadProjects } from './projects';
+import { findTodo, checkProjectTodos, hideMessage } from './helpers';
+import { getProjects, loadProjects } from './projects';
+import { hideElement, showElement } from './showHideElements';
 
 const projectHeader = document.querySelector('#projectHeader');
+const allTodosBtn = document.querySelector('#allTodosBtn');
+const addTodoButton = document.querySelector('#openAddModal');
 const projects = getProjects();
 
 // Render project list in the sidebar
@@ -14,14 +15,16 @@ const renderProjectSidebar = () => {
 
   const renderList = projects.forEach(project => {
     const projectsListItem = document.createElement('li');
+    // Add an anchor for each item
     const projectsAnchor = document.createElement('a');
     projectsAnchor.setAttribute('id', 'projectButton');
     projectsAnchor.setAttribute('class', 'home-button btn');
     projectsAnchor.setAttribute('data-attribute', `${project.id}`);
-    // Add an anchor for each item
     projectsAnchor.innerHTML = project.name;
     projectsListItem.append(projectsAnchor);
     projectList.append(projectsListItem);
+    // Set the Personal project button as active by default
+    document.querySelector('#projectButton').classList.add('active');
   });
 
   loadProjects();
@@ -73,16 +76,69 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
   });
 };
 
+const renderAll = (todos, todosEl) => {
+  // Clear the todos list each time the button is pressed
+  todosEl.innerHTML = '';
+
+  if (todos) {
+    todos.forEach(todo => {
+      if (todo) {
+        todo.forEach(item => {
+          const mainDiv = document.createElement('div');
+          // Render the project list in the project ul querySelector
+          todosEl.appendChild(mainDiv);
+
+          mainDiv.setAttribute('id', `todoItem-${item.id}`);
+          mainDiv.setAttribute('class', 'todo-item');
+          mainDiv.innerHTML = todoEl(item);
+
+          const deleteBtn = mainDiv.querySelector('i[name="deleteButton"]');
+          deleteBtn.classList.add('hidden');
+
+          handleDeleteTodo(item);
+          handleShowEdit(item);
+        });
+      }
+    });
+  }
+};
+
+const filterAll = () => {
+  const todosList = document.querySelector('#todosList');
+
+  let header = projectHeader;
+  header.dataset.id = 'all';
+  todosList.innerHTML = '';
+  header.innerHTML = 'All Todos';
+  hideMessage();
+  hideElement(addTodoButton);
+
+  const todos = projects.map(project => {
+    const todoList = project.todos;
+    if (todoList.length > 0) {
+      return todoList;
+    }
+  });
+  checkProjectTodos(todos, 'all');
+  renderAll(todos, todosList);
+};
+
+// Click handler for the 'All' button
+allTodosBtn.addEventListener('click', filterAll);
+
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
   const message = document.querySelector('#message');
   message.textContent = '';
+  showElement(addTodoButton);
+
+  // console.log({ projectBtn, projectId, header });
   projects.filter(project => {
     if (projectBtn === project.id) {
       // Render the project name in the project name querySelector
-      projectHeader.dataset.id = project.id;
+      header.dataset.id = project.id;
       header.textContent = project.name;
-      // Pass the project ID to the projectId
+
       projectId.value = project.id;
       const todos = project.todos;
       checkProjectTodos(todos, project);
@@ -100,7 +156,7 @@ const todoEl = todo => {
       <div class="todo-container__right">  
         <span class="todo-duedate">${todo.dueDate}</span>
         <i id="todoEdit-${todo.id}" class="bi bi-pencil-square todo-edit" data-attribute="${todo.id}"></i>
-        <i id="todoDelete-${todo.id}" class="bi bi-trash todo-delete" data-attribute="${todo.id}"></i>
+        <i id="todoDelete-${todo.id}" class="bi bi-trash todo-delete" name="deleteButton" data-attribute="${todo.id}"></i>
       </div>
     </div>`;
   return todoHTML;
@@ -124,16 +180,17 @@ const renderTodos = (todosArray, todosEl) => {
   });
 };
 
+// Show values for the current todo being edited on the edit form
 const initEditTodo = todoId => {
+  let todoIdField = document.querySelector('#todoId');
   let titleField = document.querySelector('#editTitle');
   let descField = document.querySelector('#editDesc');
   let dateField = document.querySelector('#editDate');
-  let todoIdField = document.querySelector('#todoId');
 
+  todoIdField.value = todoId;
   titleField.value = findTodo(projects, todoId).title;
   descField.value = findTodo(projects, todoId).description;
   dateField.value = findTodo(projects, todoId).dueDate;
-  todoIdField.value = todoId;
 };
 
 const warningMsg = projectName => {
@@ -148,6 +205,7 @@ export {
   renderProjectSidebar,
   renderProjectHeader,
   renderTodos,
+  renderAll,
   loadDefaultProject,
   filterDefault,
   initEditTodo,

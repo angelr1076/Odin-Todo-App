@@ -149,7 +149,7 @@ a:hover {
 /* Todos */
 .todos-message-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: var(--vanilla);
   font-size: 1.5rem;
@@ -198,6 +198,7 @@ a:hover {
   justify-content: space-between;
   border-bottom: 1px solid var(--white);
   z-index: 0;
+  transition: all 0.6s ease-in-out;
 }
 
 .todo-container__left {
