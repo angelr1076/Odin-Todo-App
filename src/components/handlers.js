@@ -1,5 +1,5 @@
 import { createTodo, updateTodo, removeTodo } from './todos';
-import { createProject, saveProjects } from './projects';
+import { createProject } from './projects';
 import { renderProjectSidebar, initEditTodo } from './views';
 import { hideMessage } from './helpers';
 import {

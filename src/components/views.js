@@ -2,8 +2,6 @@ import { handleDeleteTodo, handleShowEdit } from './handlers';
 import {
   findTodo,
   checkProjectTodos,
-  todoIsToday,
-  todoIsWeek,
   parseTodosView,
   capitalize,
   hideMessage,
@@ -12,6 +10,7 @@ import { getProjects, loadProjects } from './projects';
 import { hideElement, showElement } from './showHideElements';
 import parseISO from 'date-fns/parseISO';
 import isToday from 'date-fns/isToday';
+import isThisWeek from 'date-fns/isThisWeek';
 
 const projectHeader = document.querySelector('#projectHeader');
 const allTodosBtn = document.querySelector('#allTodosBtn');
@@ -88,11 +87,104 @@ const initProjectBtn = (projectBtn, list, projectId, header) => {
   });
 };
 
+const todoIsToday = todoArr => {
+  let filteredTodos = [];
+  todoArr.map(todo => {
+    let todoString = JSON.stringify(todo);
+    if (todoString) {
+      let todoArray = JSON.parse(todoString);
+      todoArray.map(item => {
+        if (isToday(parseISO(item.dueDate))) {
+          filteredTodos.push(item);
+        }
+      });
+    }
+  });
+  return filteredTodos;
+};
+
+const todoIsWeek = todoArr => {
+  let filteredTodos = [];
+  todoArr.map(todo => {
+    let todoString = JSON.stringify(todo);
+    if (todoString) {
+      let todoArray = JSON.parse(todoString);
+      todoArray.map(item => {
+        if (isThisWeek(parseISO(item.dueDate), { weekStartsOn: 1 })) {
+          filteredTodos.push(item);
+        }
+      });
+    }
+  });
+  return filteredTodos;
+};
+
 const renderHomeMenu = (todos, todosEl) => {
   let headerName = projectHeader.dataset.id;
   // Clear the todos list each time the button is pressed
   todosEl.innerHTML = '';
-  parseTodosView(headerName, todos, todosEl);
+
+  if (headerName === 'all' && todos) {
+    todos.forEach(todo => {
+      if (todo) {
+        todo.forEach(item => {
+          const mainDiv = document.createElement('div');
+          // Render the project list in the project ul querySelector
+          todosEl.appendChild(mainDiv);
+
+          mainDiv.setAttribute('id', `todoItem-${item.id}`);
+          mainDiv.setAttribute('class', 'todo-item');
+          mainDiv.innerHTML = todoEl(item);
+
+          const deleteBtn = mainDiv.querySelector('i[name="deleteButton"]');
+          deleteBtn.classList.add('hidden');
+
+          handleDeleteTodo(item);
+          handleShowEdit(item);
+        });
+      }
+    });
+  } else if (headerName === 'today' && todos) {
+    let todayTodos = todoIsToday(todos);
+
+    if (todayTodos) {
+      todayTodos.forEach(todo => {
+        const mainDiv = document.createElement('div');
+        // Render the project list in the project ul querySelector
+        todosEl.appendChild(mainDiv);
+
+        mainDiv.setAttribute('id', `todoItem-${todo.id}`);
+        mainDiv.setAttribute('class', 'todo-item');
+        mainDiv.innerHTML = todoEl(todo);
+
+        const deleteBtn = mainDiv.querySelector('i[name="deleteButton"]');
+        deleteBtn.classList.add('hidden');
+
+        handleDeleteTodo(todo);
+        handleShowEdit(todo);
+      });
+    }
+  } else if (headerName === 'week' && todos) {
+    let thisWeekTodos = todoIsWeek(todos);
+
+    if (thisWeekTodos) {
+      thisWeekTodos.forEach(todo => {
+        const mainDiv = document.createElement('div');
+        // Render the project list in the project ul querySelector
+        todosEl.appendChild(mainDiv);
+
+        mainDiv.setAttribute('id', `todoItem-${todo.id}`);
+        mainDiv.setAttribute('class', 'todo-item');
+        mainDiv.innerHTML = todoEl(todo);
+
+        const deleteBtn = mainDiv.querySelector('i[name="deleteButton"]');
+        deleteBtn.classList.add('hidden');
+
+        handleDeleteTodo(todo);
+        handleShowEdit(todo);
+      });
+    }
+  }
 };
 
 // Rebuild the filterAll function to handle All, Today and Week buttons
