@@ -10,14 +10,13 @@ import {
   showElement,
 } from './showHideElements';
 
-const projectContBtn = document.querySelector('.show-project-cont');
 const closeProjModal = document.querySelector('.cancel-project');
 const closeAddModal = document.querySelector('#todoCancelBtn');
 const closeEditModal = document.querySelector('.cancel-edit');
 const addTodoBtn = document.querySelector('#openAddModal');
 const openSidebar = document.querySelector('#openSidebar');
 const closeSidebar = document.querySelector('#closeSidebar');
-const addProjBtn = document.querySelector('.show-project-cont');
+const addProjBtn = document.querySelector('#plusProject');
 const listEl = document.querySelector('#projectList');
 const homeEl = document.querySelector('#homeList');
 const deleteBtn = document.querySelector('#deleteAll');
@@ -145,7 +144,7 @@ const toggleSidebar = () => {
   hiddenSidebar.classList.toggle('hidden');
 };
 
-projectContBtn.addEventListener('click', toggleAddProj);
+addProjBtn.addEventListener('click', toggleAddProj);
 closeProjModal.addEventListener('click', toggleAddProj);
 closeAddModal.addEventListener('click', toggleAddModal);
 closeEditModal.addEventListener('click', toggleEditModal);

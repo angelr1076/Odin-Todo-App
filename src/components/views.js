@@ -32,7 +32,7 @@ const renderProjectSidebar = () => {
     projectsAnchor.setAttribute('id', 'projectButton');
     projectsAnchor.setAttribute('class', 'home-button btn');
     projectsAnchor.setAttribute('data-attribute', `${project.id}`);
-    projectsAnchor.innerHTML = project.name;
+    projectsAnchor.innerHTML = `<i class="bi bi-archive project-icon"></i> ${project.name}`;
     projectsListItem.append(projectsAnchor);
     projectList.append(projectsListItem);
     // Set the Personal project button as active by default

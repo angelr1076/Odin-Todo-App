@@ -37,7 +37,6 @@ const findTodo = (projects, todoId) => {
     return todoToEdit;
   } else {
     let projectOnPage = projects.find(project => project.id === projectId);
-    console.log(projectOnPage);
     const todoToEdit = projectOnPage.todos.find(todo => todo.id === todoId);
     return todoToEdit;
   }

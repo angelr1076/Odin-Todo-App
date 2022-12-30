@@ -156,6 +156,31 @@ a:hover {
   cursor: pointer;
 }
 
+.home-menu {
+  display: flex;
+  justify-content: space-evenly;
+    color: var(--vanilla);
+}
+
+.cal-icon, .project-icon {
+  margin-right: 1em;
+}
+
+.to-hide {
+  visibility: hidden;
+}
+
+.projects-menu {
+  display: flex;
+  justify-content: space-evenly;
+  color: var(--vanilla);
+  margin-top: 1em;
+}
+
+.home-button {
+  display: flex;
+}
+
 /* Todos */
 .todos-container {
   background: var(--charcoal);

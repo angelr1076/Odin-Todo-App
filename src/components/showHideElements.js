@@ -32,6 +32,7 @@ const toggleEditModal = () => {
 
 const toggleAddProj = () => {
   const projectFormCont = document.querySelector('.project-form-container');
+  console.log('project button');
   if (projectFormCont.classList.contains('open')) {
     projectFormCont.classList.remove('open');
     projectFormCont.classList.add('hidden');
