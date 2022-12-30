@@ -46,6 +46,11 @@ button {
   cursor: pointer;
 }
 
+.title-text {
+  font-size: 4em;
+  color: white;
+}
+
 .add,
 .edit {
   border: 2px solid var(--charcoal);
@@ -147,6 +152,23 @@ a:hover {
 }
 
 /* Todos */
+.todos-container {
+  background: var(--charcoal);
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+}
+
+.todo-container {
+  display: flex;
+  padding: 1em;
+  margin: 1em;
+  color: var(--white);
+  justify-content: space-between;
+  border-bottom: 1px solid var(--white);
+  transition: all 0.6s ease-in-out;
+}
+
 .todos-message-container {
   display: flex;
   justify-content: center;
@@ -181,24 +203,6 @@ a:hover {
 
 .delete-all:hover .delete-all-msg {
   display: block;
-}
-
-.todos-container {
-  background: var(--charcoal);
-  display: flex;
-  flex-direction: column;
-  flex: 4;
-}
-
-.todo-container {
-  display: flex;
-  padding: 1em;
-  margin: 1em;
-  color: var(--white);
-  justify-content: space-between;
-  border-bottom: 1px solid var(--white);
-  z-index: 0;
-  transition: all 0.6s ease-in-out;
 }
 
 .todo-container__left {
@@ -358,4 +362,25 @@ input[type="date"] {
 .show {
   display: inherit;
   visibility: visible;
+}
+
+@media screen and (max-width: 600px) {
+  .sidebar-container {
+  }
+
+  .editor {
+    width: 225px;
+  }
+
+  .add, .cancel {
+    font-size: .8rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .todos-container {
+    padding: 1em;
+  }
 }

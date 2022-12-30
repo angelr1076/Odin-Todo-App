@@ -14,11 +14,19 @@ const projectContBtn = document.querySelector('.show-project-cont');
 const closeProjModal = document.querySelector('.cancel-project');
 const closeAddModal = document.querySelector('#todoCancelBtn');
 const closeEditModal = document.querySelector('.cancel-edit');
+const addTodoBtn = document.querySelector('#openAddModal');
 const openSidebar = document.querySelector('#openSidebar');
 const closeSidebar = document.querySelector('#closeSidebar');
+const addProjBtn = document.querySelector('.show-project-cont');
 const listEl = document.querySelector('#projectList');
 const homeEl = document.querySelector('#homeList');
 const deleteBtn = document.querySelector('#deleteAll');
+
+// Button titles
+openSidebar.title = 'Toggle Sidebar View';
+closeSidebar.title = 'Close Sidebar';
+addProjBtn.title = 'Add Project';
+addTodoBtn.title = 'Add Todo';
 
 // Add project form - when the submit button is chosen, create project and add to the sidebar
 const submitProjectForm = element => {
