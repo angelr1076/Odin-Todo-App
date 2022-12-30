@@ -3,6 +3,8 @@ import {
   findTodo,
   checkProjectTodos,
   todoIsToday,
+  todoIsWeek,
+  parseTodosView,
   capitalize,
   hideMessage,
 } from './helpers';
@@ -14,6 +16,7 @@ import isToday from 'date-fns/isToday';
 const projectHeader = document.querySelector('#projectHeader');
 const allTodosBtn = document.querySelector('#allTodosBtn');
 const daysTodosBtn = document.querySelector('#daysTodosBtn');
+const weekTodosBtn = document.querySelector('#weekTodosBtn');
 const addTodoButton = document.querySelector('#openAddModal');
 const projects = getProjects();
 
@@ -89,72 +92,25 @@ const renderHomeMenu = (todos, todosEl) => {
   let headerName = projectHeader.dataset.id;
   // Clear the todos list each time the button is pressed
   todosEl.innerHTML = '';
-
-  if (headerName === 'all' && todos) {
-    console.log(todos);
-    todos.forEach(todo => {
-      if (todo) {
-        todo.forEach(item => {
-          const mainDiv = document.createElement('div');
-          // Render the project list in the project ul querySelector
-          todosEl.appendChild(mainDiv);
-
-          mainDiv.setAttribute('id', `todoItem-${item.id}`);
-          mainDiv.setAttribute('class', 'todo-item');
-          mainDiv.innerHTML = todoEl(item);
-
-          const deleteBtn = mainDiv.querySelector('i[name="deleteButton"]');
-          deleteBtn.classList.add('hidden');
-
-          handleDeleteTodo(item);
-          handleShowEdit(item);
-        });
-      }
-    });
-  } else if (headerName === 'today' && todos) {
-    let todayTodos = todoIsToday(todos);
-
-    if (todayTodos) {
-      todayTodos.forEach(todo => {
-        const mainDiv = document.createElement('div');
-        // Render the project list in the project ul querySelector
-        todosEl.appendChild(mainDiv);
-
-        mainDiv.setAttribute('id', `todoItem-${todo.id}`);
-        mainDiv.setAttribute('class', 'todo-item');
-        mainDiv.innerHTML = todoEl(todo);
-
-        const deleteBtn = mainDiv.querySelector('i[name="deleteButton"]');
-        deleteBtn.classList.add('hidden');
-
-        handleDeleteTodo(todo);
-        handleShowEdit(todo);
-      });
-    }
-  }
+  parseTodosView(headerName, todos, todosEl);
 };
 
 // Rebuild the filterAll function to handle All, Today and Week buttons
 const filterAll = btnName => {
   const todosList = document.querySelector('#todosList');
   const button = btnName.target.name;
-  // separate header assignment into its own function based on the button name attribute
+  let header = projectHeader;
+  todosList.innerHTML = '';
+
   if (button === 'all') {
-    let header = projectHeader;
     header.dataset.id = button;
-    todosList.innerHTML = '';
     header.innerHTML = `${capitalize(button)} Todos`;
-    hideMessage();
-    hideElement(addTodoButton);
   } else if (button === 'today') {
-    let header = projectHeader;
     header.dataset.id = button;
-    todosList.innerHTML = '';
     header.innerHTML = capitalize(button);
-    hideMessage();
-    hideElement(addTodoButton);
   } else if (button === 'week') {
-    // Do something...
+    header.dataset.id = button;
+    header.innerHTML = `This ${capitalize(button)}`;
   }
 
   const todos = projects.map(project => {
@@ -164,6 +120,8 @@ const filterAll = btnName => {
     }
   });
 
+  hideMessage();
+  hideElement(addTodoButton);
   checkProjectTodos(todos, button);
   renderHomeMenu(todos, todosList);
 };
@@ -172,6 +130,8 @@ const filterAll = btnName => {
 allTodosBtn.addEventListener('click', filterAll);
 // Click handler for the 'Today' button
 daysTodosBtn.addEventListener('click', filterAll);
+// Click handler for the 'Week' button
+weekTodosBtn.addEventListener('click', filterAll);
 
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
@@ -252,6 +212,7 @@ const warningMsg = projectName => {
 export {
   renderProjectSidebar,
   renderProjectHeader,
+  todoEl,
   renderTodos,
   renderHomeMenu,
   loadDefaultProject,
