@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getProjects, saveProjects } from './projects';
 import { findTodo, checkProjectTodos } from './helpers';
-import { filterDefault, renderTodos, renderAll } from './views';
+import { filterDefault, renderTodos, renderHomeMenu } from './views';
 
 const projects = getProjects();
 let allTodos = projects.map(project => project.todos);
@@ -61,7 +61,7 @@ const updateTodo = (id, updates) => {
   if (projectOnPage) {
     renderTodos(projectOnPage.todos, todosList);
   } else {
-    renderAll(allTodos, todosList);
+    renderHomeMenu(allTodos, todosList);
   }
 
   return todo;
