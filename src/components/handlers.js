@@ -1,7 +1,7 @@
 import { createTodo, updateTodo, removeTodo } from './todos';
 import { createProject, saveProjects } from './projects';
 import { renderProjectSidebar, initEditTodo } from './views';
-import { checkProjectTodos, hideMessage } from './helpers';
+import { hideMessage } from './helpers';
 import {
   toggleAddProj,
   toggleAddModal,
