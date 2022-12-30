@@ -6,6 +6,7 @@
   /* Primary color palette */
   --white: #fff;
   --black: #000;
+  --black-blur: #19222e;
   --black-faded: #233142;
   --charcoal: #455d7a;
   --coral: #f95959;
@@ -35,8 +36,13 @@ html {
   text-transform: capitalize;
 }
 
+.main-container {
+
+}
+
 .content {
   height: 100vh;
+  /* flex: 1; */
 }
 
 button {
@@ -95,7 +101,7 @@ button {
 /* Sidebar */
 .lower-container {
   display: flex;
-  height: 95vh;
+  height: 90vh;
 }
 
 .sidebar-visible {
@@ -344,6 +350,15 @@ input[type="date"] {
   border-top-right-radius: 5px;
   padding: 1em;
   text-align: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--black-blur);
+  color: var(--vanilla);
+  height: 5vh;
 }
 
 /* Addtional classes */
