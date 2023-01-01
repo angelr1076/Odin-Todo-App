@@ -48,7 +48,7 @@ const toggleActive = e => {
   [].forEach.call(elems, function (el) {
     el.classList.remove('active');
   });
-  e.target.className = 'active';
+  e.target.className += ' active'; // Adds the active class without removing the current class
 };
 
 export {

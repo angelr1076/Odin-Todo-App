@@ -1,6 +1,6 @@
 import { createTodo, updateTodo, removeTodo } from './todos';
 import { createProject } from './projects';
-import { renderProjectSidebar, initEditTodo } from './views';
+import { filterAll, renderProjectSidebar, initEditTodo } from './views';
 import { hideMessage } from './helpers';
 import {
   toggleAddProj,
@@ -154,6 +154,18 @@ deleteBtn.addEventListener('click', deleteAll);
 openSidebar.addEventListener('click', toggleSidebar);
 closeSidebar.addEventListener('click', toggleSidebar);
 
+const handleHomeBtnLoad = () => {
+  const allTodosBtn = document.getElementById('allTodosBtn');
+  const daysTodosBtn = document.querySelector('#daysTodosBtn');
+  const weekTodosBtn = document.querySelector('#weekTodosBtn');
+  // Click handler for the 'All' button
+  allTodosBtn.addEventListener('click', filterAll);
+  // Click handler for the 'Today' button
+  daysTodosBtn.addEventListener('click', filterAll);
+  // Click handler for the 'Week' button
+  weekTodosBtn.addEventListener('click', filterAll);
+};
+
 const handleSubmitProject = () => {
   const submitProjectBtn = document.querySelector('#projectSubmitBtn');
   return submitProjectForm(submitProjectBtn);
@@ -187,6 +199,7 @@ const handleEditTodo = () => {
 export {
   submitProjectForm,
   submitTodoForm,
+  handleHomeBtnLoad,
   handleSubmitProject,
   handleSubmitTodo,
   handleDeleteTodo,

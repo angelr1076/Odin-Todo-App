@@ -10,11 +10,52 @@ import { getProjects, loadProjects } from './projects';
 import { hideElement, showElement } from './showHideElements';
 
 const projectHeader = document.querySelector('#projectHeader');
-const allTodosBtn = document.querySelector('#allTodosBtn');
-const daysTodosBtn = document.querySelector('#daysTodosBtn');
-const weekTodosBtn = document.querySelector('#weekTodosBtn');
+
 const addTodoButton = document.querySelector('#openAddModal');
 const projects = getProjects();
+
+const renderHomeSidebar = () => {
+  const homeList = document.querySelector('#homeList');
+
+  // Create button to view all todos
+  const allLi = document.createElement('li');
+  const allAnchor = document.createElement('a');
+  allAnchor.setAttribute('href', '#');
+  allAnchor.setAttribute('id', 'allTodosBtn');
+  allAnchor.setAttribute('name', 'all');
+  allAnchor.dataset.id = 'all';
+  allAnchor.setAttribute('class', 'home-button btn');
+  allAnchor.innerHTML = `<i class="bi bi-border-all cal-icon"></i> All`;
+  allLi.appendChild(allAnchor);
+
+  // Create button to view today's todos
+  const todayLi = document.createElement('li');
+  const todayAnchor = document.createElement('a');
+  todayAnchor.setAttribute('href', '#');
+  todayAnchor.setAttribute('id', 'daysTodosBtn');
+  todayAnchor.setAttribute('name', 'today');
+  todayAnchor.dataset.id = 'today';
+  todayAnchor.setAttribute('class', 'home-button btn');
+  todayAnchor.innerHTML = `<i class="bi bi-1-square cal-icon"></i> Today`;
+  todayLi.appendChild(todayAnchor);
+
+  // Create button to view week's todos
+  const weekLi = document.createElement('li');
+  const weekAnchor = document.createElement('a');
+  weekAnchor.setAttribute('href', '#');
+  weekAnchor.setAttribute('id', 'weekTodosBtn');
+  weekAnchor.setAttribute('name', 'week');
+  weekAnchor.dataset.id = 'week';
+  weekAnchor.setAttribute('class', 'home-button btn');
+  weekAnchor.innerHTML = `<i class="bi bi-calendar-event cal-icon"></i> Week`;
+  weekLi.appendChild(weekAnchor);
+
+  homeList.appendChild(allLi);
+  homeList.appendChild(todayLi);
+  homeList.appendChild(weekLi);
+
+  return homeList;
+};
 
 // Render project list in the sidebar
 const renderProjectSidebar = () => {
@@ -122,13 +163,6 @@ const filterAll = btnName => {
   renderHomeMenu(todos, todosList);
 };
 
-// Click handler for the 'All' button
-allTodosBtn.addEventListener('click', filterAll);
-// Click handler for the 'Today' button
-daysTodosBtn.addEventListener('click', filterAll);
-// Click handler for the 'Week' button
-weekTodosBtn.addEventListener('click', filterAll);
-
 // Filter the project by its ID
 const filterProject = (projectBtn, projectId, header) => {
   const message = document.querySelector('#message');
@@ -206,6 +240,7 @@ const warningMsg = projectName => {
 };
 
 export {
+  renderHomeSidebar,
   renderProjectSidebar,
   renderProjectHeader,
   todoEl,
@@ -213,6 +248,7 @@ export {
   renderHomeMenu,
   loadDefaultProject,
   filterDefault,
+  filterAll,
   initEditTodo,
   warningMsg,
 };

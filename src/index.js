@@ -1,7 +1,12 @@
-import { renderProjectSidebar, loadDefaultProject } from './components/views';
+import {
+  renderHomeSidebar,
+  renderProjectSidebar,
+  loadDefaultProject,
+} from './components/views';
 import {
   handleSubmitProject,
   handleSubmitTodo,
+  handleHomeBtnLoad,
   handleShowAdd,
   handleEditTodo,
 } from './components/handlers';
@@ -13,17 +18,18 @@ const component = () => {
   mainContainer.setAttribute('class', 'main-container', 'id', 'mainContainer');
   const mainContent = document.querySelector('#content');
   mainContainer.appendChild(mainContent);
-
   return mainContainer;
 };
 
 window.addEventListener('load', () => {
   document.body.appendChild(component());
-  // Show list of Projects in sidebar
+  // Load views
+  renderHomeSidebar();
+  renderProjectSidebar();
   handleShowAdd();
   handleEditTodo();
-  renderProjectSidebar();
   loadDefaultProject();
   handleSubmitProject();
   handleSubmitTodo();
+  handleHomeBtnLoad();
 });

@@ -75,7 +75,7 @@ const todoIsWeek = todoArr => {
     if (todoString) {
       let todoArray = JSON.parse(todoString);
       todoArray.map(item => {
-        if (isThisWeek(parseISO(item.dueDate), { weekStartsOn: 1 })) {
+        if (isThisWeek(parseISO(item.dueDate))) {
           filteredTodos.push(item);
         }
       });
