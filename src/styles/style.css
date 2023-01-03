@@ -209,7 +209,6 @@ a:hover {
 .delete-all {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   color: var(--vanilla);
   font-size: 1.5rem;
 }
@@ -401,9 +400,6 @@ input[type="date"] {
 }
 
 @media screen and (max-width: 600px) {
-  .sidebar-container {
-  }
-
   .editor {
     width: 225px;
   }
@@ -423,5 +419,14 @@ input[type="date"] {
   .todo-container {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .lower-container {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .delete-all, .footer {
+    display: none;
   }
 }
