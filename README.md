@@ -5,6 +5,8 @@ Odin project todo list.Contents generated with webpack using localStorage and da
 Inspired by:
 Todoist and any.do
 
+[View App](https://todoozie.netlify.app/)
+
 ## Built Using
 
 - JavaScript
