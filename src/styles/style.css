@@ -12,7 +12,7 @@
   --coral: #f95959;
   --lightgray: #e3e3e3;
   /* Secondary palette */
-  --vanilla: #F2ECE4;
+  --vanilla: #f2ece4;
   --brickblue: #b2c9d8;
   --bluehover: #ccdfeb;
   --salmon: rgba(250, 128, 114, 1);
@@ -46,6 +46,7 @@ button {
   font-size: 1rem;
   border-radius: 2px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .title-text {
@@ -86,7 +87,7 @@ button {
   color: var(--white);
 }
 
-.brand>h3 {
+.brand > h3 {
   color: var(--white);
 }
 
@@ -156,10 +157,11 @@ a:hover {
 .home-menu {
   display: flex;
   justify-content: space-evenly;
-    color: var(--vanilla);
+  color: var(--vanilla);
 }
 
-.cal-icon, .project-icon {
+.cal-icon,
+.project-icon {
   margin-right: 1em;
 }
 
@@ -192,8 +194,14 @@ a:hover {
   margin: 1em;
   color: var(--white);
   justify-content: space-between;
-  border-bottom: 1px solid var(--white);
-  transition: all 0.6s ease-in-out;
+  border: 1px solid var(--white);
+  background-color: var(--black-faded);
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.todo-container:hover {
+  opacity: 0.8;
 }
 
 .todos-message-container {
@@ -240,12 +248,6 @@ a:hover {
   flex-direction: row-reverse;
 }
 
-.todo-container:hover {
-  opacity: 0.5;
-  z-index: 0;
-}
-
-
 .todo-duedate,
 .bi {
   margin-left: 0.5em;
@@ -270,7 +272,7 @@ a:hover {
   height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: var(var(--white));
+  background-color: var(--white);
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -312,24 +314,24 @@ textarea.editor {
   flex-wrap: wrap;
 }
 
-.form-row>label {
+.form-row > label {
   font-size: 1rem;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   margin-top: 1em;
   text-transform: capitalize;
 }
 
-input[type="text"],
-input[type="number"] {
+input[type='text'],
+input[type='number'] {
   height: 3em;
-  padding-left: .75em;
+  padding-left: 0.75em;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   height: 1.5em;
 }
 
-input[type="date"] {
+input[type='date'] {
   height: 3em;
   padding-left: 1em;
 }
@@ -339,7 +341,8 @@ input[type="date"] {
   width: 90%;
   max-width: 450px;
   position: relative;
-  border-radius: 5px;
+  border-radius: 10px;
+  z-index: 100;
 }
 
 .edit-modal.open .modal-container,
@@ -398,14 +401,21 @@ input[type="date"] {
   display: inherit;
   visibility: visible;
 }
+@media screen and (min-width: 100px) {
+  .todo-container {
+    margin-left: 2em;
+    width: 70%;
+  }
+}
 
 @media screen and (max-width: 600px) {
   .editor {
     width: 225px;
   }
 
-  .add, .cancel {
-    font-size: .8rem;
+  .add,
+  .cancel {
+    font-size: 0.8rem;
   }
 
   h2 {
@@ -426,7 +436,8 @@ input[type="date"] {
     height: 100%;
   }
 
-  .delete-all, .footer {
+  .delete-all,
+  .footer {
     display: none;
   }
 }
