@@ -1,4 +1,5 @@
 import { handleDeleteTodo, handleShowEdit } from './handlers';
+import { toggleCompleted } from './todos';
 import {
   findTodo,
   checkProjectTodos,
@@ -187,13 +188,26 @@ const filterProject = (projectBtn, projectId, header) => {
 const todoEl = todo => {
   const todoHTML = `
     <div id="todoContainer" class="todo-container">
-      <div class="todo-container__left>
-        <h3 class="todo-title">${todo.title}</h3>
+        <input type="checkbox" class="todo-checkbox" id="completed-${
+          todo.id
+        }" ${todo.completed ? 'checked' : ''}>
+      <div class="todo-container__left">
+        <h3 class="todo-title${todo.completed ? ' todo-completed' : ''}">${
+    todo.title
+  }</h3>
       </div>
       <div class="todo-container__right">  
         <span class="todo-duedate">${todo.dueDate}</span>
-        <i id="todoEdit-${todo.id}" class="bi bi-pencil-square todo-edit" data-attribute="${todo.id}"></i>
-        <i id="todoDelete-${todo.id}" class="bi bi-trash todo-delete" name="deleteButton" data-attribute="${todo.id}"></i>
+        <i id="todoEdit-${
+          todo.id
+        }" class="bi bi-pencil-square todo-edit" data-attribute="${
+    todo.id
+  }"></i>
+        <i id="todoDelete-${
+          todo.id
+        }" class="bi bi-trash todo-delete" name="deleteButton" data-attribute="${
+    todo.id
+  }"></i>
       </div>
     </div>`;
 
@@ -201,7 +215,6 @@ const todoEl = todo => {
 };
 
 const renderTodos = (todosArray, todosEl) => {
-  // Clear the todos list each time the button is pressed
   todosEl.innerHTML = '';
 
   todosArray.forEach(todo => {
@@ -215,6 +228,14 @@ const renderTodos = (todosArray, todosEl) => {
 
     handleDeleteTodo(todo);
     handleShowEdit(todo);
+  });
+
+  todosArray.forEach(todo => {
+    const mainDiv = document.getElementById(`todoItem-${todo.id}`);
+    const completedCheckbox = mainDiv.querySelector(`#completed-${todo.id}`);
+    completedCheckbox.addEventListener('change', () => {
+      toggleCompleted(todo.id);
+    });
   });
 };
 

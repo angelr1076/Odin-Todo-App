@@ -17,6 +17,7 @@ const createTodo = todo => {
     title: todo.title,
     description: todo.description,
     dueDate: todo.dueDate,
+    completed: false,
   };
 
   pushTodo(todoProps);
@@ -78,4 +79,19 @@ const pushTodo = todo => {
   });
 };
 
-export { createTodo, removeTodo, updateTodo };
+const toggleCompleted = id => {
+  const todo = findTodo(projects, id);
+  const todoTitle = document.querySelector(`#todoItem-${id} .todo-title`);
+
+  todo.completed = !todo.completed;
+
+  if (todo.completed) {
+    todoTitle.classList.add('todo-completed');
+  } else {
+    todoTitle.classList.remove('todo-completed');
+  }
+
+  saveProjects();
+};
+
+export { createTodo, removeTodo, updateTodo, toggleCompleted };

@@ -194,6 +194,7 @@ a:hover {
   margin: 1em;
   color: var(--white);
   justify-content: space-between;
+  align-items: center;
   border: 1px solid var(--white);
   background-color: var(--black-faded);
   border-radius: 5px;
@@ -204,6 +205,11 @@ a:hover {
   opacity: 0.8;
 }
 
+.todo-completed {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
 .todos-message-container {
   display: flex;
   justify-content: center;
@@ -212,6 +218,49 @@ a:hover {
   font-size: 1.5rem;
   padding: 0.25em;
   margin-bottom: 1em;
+}
+
+.todo-checkbox input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.todo-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: var(--lightgray);
+  border: 1px solid var(--black-faded);
+  border-radius: 3px;
+}
+
+.todo-checkbox span {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 0;
+}
+
+.todo-checkbox span::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 9px;
+  height: 10px;
+  width: 5px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg) scale(1);
+  opacity: 0;
+  z-index: 1;
+}
+
+.todo-checkbox input[type='checkbox']:checked ~ span::after {
+  opacity: 1;
 }
 
 .delete-all {
