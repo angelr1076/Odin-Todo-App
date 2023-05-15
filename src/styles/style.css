@@ -55,7 +55,8 @@ button {
 }
 
 .add,
-.edit {
+.edit,
+.delete {
   border: 2px solid var(--charcoal);
 }
 
@@ -64,7 +65,8 @@ button {
 }
 
 .add:hover,
-.edit:hover {
+.edit:hover,
+.delete:hover {
   opacity: 0.7;
   color: var(--white);
   background-color: var(--charcoal);
@@ -311,6 +313,7 @@ a:hover {
 
 /* Modal */
 .edit-modal,
+.delete-modal,
 .add-modal,
 .project-form-container {
   display: none;
@@ -326,6 +329,7 @@ a:hover {
 }
 
 .edit-modal.open,
+.delete-modal.open,
 .add-modal.open,
 .project-form-container.open {
   display: flex;
@@ -395,6 +399,7 @@ input[type='date'] {
 }
 
 .edit-modal.open .modal-container,
+.delete-modal.open .modal-container,
 .add-modal.open .modal-container,
 .project-form-container.open .modal-container {
   animation: move 0.8s ease-in-out;
@@ -450,6 +455,7 @@ input[type='date'] {
   display: inherit;
   visibility: visible;
 }
+
 @media screen and (min-width: 100px) {
   .todo-container {
     margin-left: 2em;

@@ -1,11 +1,17 @@
 import { createTodo, updateTodo, removeTodo } from './todos';
 import { createProject } from './projects';
-import { filterAll, renderProjectSidebar, initEditTodo } from './views';
+import {
+  filterAll,
+  renderProjectSidebar,
+  initEditTodo,
+  showDeleteAll,
+} from './views';
 import { hideMessage } from './helpers';
 import {
   toggleAddProj,
   toggleAddModal,
   toggleEditModal,
+  toggleDeleteModal,
   toggleActive,
   showElement,
 } from './showHideElements';
@@ -13,6 +19,7 @@ import {
 const closeProjModal = document.querySelector('.cancel-project');
 const closeAddModal = document.querySelector('#todoCancelBtn');
 const closeEditModal = document.querySelector('.cancel-edit');
+const closeDeleteModal = document.querySelector('.cancel-delete');
 const addTodoBtn = document.querySelector('#openAddModal');
 const openSidebar = document.querySelector('#openSidebar');
 const closeSidebar = document.querySelector('#closeSidebar');
@@ -20,6 +27,7 @@ const addProjBtn = document.querySelector('#plusProject');
 const listEl = document.querySelector('#projectList');
 const homeEl = document.querySelector('#homeList');
 const deleteBtn = document.querySelector('#deleteAll');
+const deleteConfirmBtn = document.querySelector('#deleteTodoSubmitBtn');
 
 // Button titles
 openSidebar.title = 'Toggle Sidebar View';
@@ -82,6 +90,7 @@ const submitTodoForm = element => {
 
     hideMessage();
     toggleAddModal();
+    showDeleteAll();
     // Clear form fields
     titleEl.value = '';
     descEl.value = '';
@@ -110,6 +119,7 @@ const submitTodoDelete = element => {
   element.addEventListener('click', e => {
     e.preventDefault();
     removeTodo(todoId);
+    showDeleteAll();
   });
 };
 
@@ -137,6 +147,7 @@ const submitTodoEdit = element => {
 const deleteAll = () => {
   localStorage.clear();
   location.reload();
+  submitTodoDelete();
 };
 
 const toggleSidebar = () => {
@@ -148,11 +159,13 @@ addProjBtn.addEventListener('click', toggleAddProj);
 closeProjModal.addEventListener('click', toggleAddProj);
 closeAddModal.addEventListener('click', toggleAddModal);
 closeEditModal.addEventListener('click', toggleEditModal);
+closeDeleteModal.addEventListener('click', toggleDeleteModal);
 listEl.addEventListener('click', toggleActive);
 homeEl.addEventListener('click', toggleActive);
-deleteBtn.addEventListener('click', deleteAll);
+deleteBtn.addEventListener('click', toggleDeleteModal);
 openSidebar.addEventListener('click', toggleSidebar);
 closeSidebar.addEventListener('click', toggleSidebar);
+deleteConfirmBtn.addEventListener('click', deleteAll);
 
 const handleHomeBtnLoad = () => {
   const allTodosBtn = document.getElementById('allTodosBtn');

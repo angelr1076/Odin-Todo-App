@@ -13,7 +13,21 @@ import { hideElement, showElement } from './showHideElements';
 const projectHeader = document.querySelector('#projectHeader');
 
 const addTodoButton = document.querySelector('#openAddModal');
+const deleteDiv = document.querySelector('.delete-all');
 const projects = getProjects();
+console.log(projects);
+
+const showDeleteAll = () => {
+  projects.forEach(project => {
+    if (project.todos.length > 0) {
+      deleteDiv.classList.remove('hidden');
+      deleteDiv.classList.add('show');
+    } else {
+      deleteDiv.classList.remove('show');
+      deleteDiv.classList.add('hidden');
+    }
+  });
+};
 
 const renderHomeSidebar = () => {
   const homeList = document.querySelector('#homeList');
@@ -267,6 +281,7 @@ export {
   todoEl,
   renderTodos,
   renderHomeMenu,
+  showDeleteAll,
   loadDefaultProject,
   filterDefault,
   filterAll,

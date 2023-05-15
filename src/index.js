@@ -2,6 +2,7 @@ import {
   renderHomeSidebar,
   renderProjectSidebar,
   loadDefaultProject,
+  showDeleteAll,
 } from './components/views';
 import {
   handleSubmitProject,
@@ -32,4 +33,5 @@ window.addEventListener('load', () => {
   handleSubmitProject();
   handleSubmitTodo();
   handleHomeBtnLoad();
+  showDeleteAll();
 });

@@ -30,9 +30,19 @@ const toggleEditModal = () => {
   }
 };
 
+const toggleDeleteModal = () => {
+  const modalElement = document.querySelector('.delete-modal');
+  if (modalElement.classList.contains('open')) {
+    modalElement.classList.remove('open');
+    modalElement.classList.add('hidden');
+  } else {
+    modalElement.classList.remove('hidden');
+    modalElement.classList.add('open');
+  }
+};
+
 const toggleAddProj = () => {
   const projectFormCont = document.querySelector('.project-form-container');
-  console.log('project button');
   if (projectFormCont.classList.contains('open')) {
     projectFormCont.classList.remove('open');
     projectFormCont.classList.add('hidden');
@@ -56,6 +66,7 @@ export {
   hideElement,
   toggleAddModal,
   toggleEditModal,
+  toggleDeleteModal,
   toggleAddProj,
   toggleActive,
 };
