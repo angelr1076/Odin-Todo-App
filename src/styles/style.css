@@ -376,7 +376,8 @@ textarea.editor {
 
 input[type='text'],
 input[type='number'],
-.title {
+.title,
+.editTitle {
   height: 3em;
   padding-left: 0.75em;
 }
