@@ -5,7 +5,7 @@ Odin Project Todo List
 Inspired by:
 Todoist and any.do
 
-[View App](https://todoozie.netlify.app/)
+[View App](https://odin-todo-app.pages.dev/)
 
 ## What is it?
 
